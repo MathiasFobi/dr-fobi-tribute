@@ -349,6 +349,7 @@
             padding: 1rem 2rem;
             position: relative;
             width: 50%;
+            cursor: pointer;
         }
 
         .timeline-item:nth-child(even) {
@@ -363,6 +364,12 @@
             box-shadow: 0 5px 30px rgba(0,0,0,0.08);
             max-width: 400px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
         }
 
         .timeline-content::before {
@@ -394,11 +401,44 @@
             font-size: 1.3rem;
             color: var(--navy);
             margin: 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-expand-icon {
+            font-size: 0.8rem;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content.expanded .timeline-expand-icon {
+            transform: rotate(180deg);
         }
 
         .timeline-description {
             color: var(--text-light);
             font-size: 0.95rem;
+        }
+
+        .timeline-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding-top: 0;
+        }
+
+        .timeline-content.expanded .timeline-details {
+            max-height: 300px;
+            padding-top: 1rem;
+        }
+
+        .timeline-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--gold-light);
         }
 
         /* Legacy Section */
@@ -448,9 +488,131 @@
             font-size: 0.95rem;
         }
 
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--white);
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-form {
+            background: var(--cream);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .testimonial-form h3 {
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background: var(--navy);
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .testimonial-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .no-testimonials {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            padding: 2rem;
+        }
+
         /* Family Section */
         .family {
-            background: var(--white);
+            background: var(--cream);
         }
 
         .family-intro {
@@ -529,7 +691,7 @@
 
         /* Birthday Celebration Section */
         .celebration {
-            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -714,6 +876,28 @@
             font-size: 0.85rem;
         }
 
+        /* Success Message */
+        .success-message {
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--navy);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-container {
@@ -776,6 +960,10 @@
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
+
+            .birthday-message {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -789,6 +977,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#career">Career</a></li>
                 <li><a href="#legacy">Legacy</a></li>
+                <li><a href="#testimonials">Stories</a></li>
                 <li><a href="#family">Family</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#celebration">Celebration</a></li>
@@ -869,76 +1058,124 @@
         </div>
 
         <div class="timeline">
-            <!-- Timeline items - Dr. Fobi's actual milestones -->
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1946</div>
-                    <h4 class="timeline-title">Born in Nkwen, Cameroon</h4>
-                    <p class="timeline-description">Born September 21, 1946, in the village of Nkwen (now Bamenda III Council), the youngest of seven children to Vincent and Barbara Fobi.</p>
+                    <h4 class="timeline-title">Born in Nkwen, Cameroon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Born September 21, 1946, in the village of Nkwen (now Bamenda III Council).</p>
+                    <div class="timeline-details">
+                        <p>The youngest of seven children born to Vincent Tamfu Fobi, a farmer, and Barbara Ngeche Fobi.</p>
+                        <p>Family values of hard work and community service shaped his early years.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1961</div>
-                    <h4 class="timeline-title">Sacred Heart College Mankon</h4>
-                    <p class="timeline-description">Became one of the inaugural students at Sacred Heart College, helping physically build the school while excelling in his studies.</p>
+                    <h4 class="timeline-title">Sacred Heart College Mankon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Became one of the inaugural students, helping build the school.</p>
+                    <div class="timeline-details">
+                        <p>One of the first students at this prestigious institution.</p>
+                        <p>Helped physically construct the school buildings while excelling academically.</p>
+                        <p>This experience taught him the value of hard work and dedication.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1966</div>
-                    <h4 class="timeline-title">ASPAU Scholarship to USA</h4>
-                    <p class="timeline-description">Received the prestigious African Scholarship Program of American Universities (ASPAU) scholarship, bringing him to the United States.</p>
+                    <h4 class="timeline-title">ASPAU Scholarship to USA <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Received the prestigious ASPAU scholarship.</p>
+                    <div class="timeline-details">
+                        <p>African Scholarship Program of American Universities (ASPAU) brought him to the United States.</p>
+                        <p>This scholarship opened doors to world-class medical education.</p>
+                        <p>His journey from Cameroon to America began.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1974</div>
-                    <h4 class="timeline-title">Medical Degree & Residency</h4>
-                    <p class="timeline-description">Earned MD from University of Cincinnati College of Medicine (3-year program). Completed residency at King Drew Medical Center, later becoming Chief of General Surgery.</p>
+                    <h4 class="timeline-title">Medical Degree & Residency <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Earned MD from University of Cincinnati, became Chief of Surgery.</p>
+                    <div class="timeline-details">
+                        <p>University of Cincinnati College of Medicine - completed 4-year program in 3 years.</p>
+                        <p>Completed Pharmacy degree at University of Michigan in 4 years (5-year program).</p>
+                        <p>Residency at King Drew Medical Center, Los Angeles.</p>
+                        <p>Eventually became Chief of the General Surgery Division.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1981</div>
-                    <h4 class="timeline-title">Center for Surgical Treatment of Obesity</h4>
-                    <p class="timeline-description">Opened one of the first bariatric surgery centers in Los Angeles, pioneering the field of weight-loss surgery.</p>
+                    <h4 class="timeline-title">Center for Surgical Treatment of Obesity <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Opened one of the first bariatric surgery centers in Los Angeles.</p>
+                    <div class="timeline-details">
+                        <p>Pioneered the field of weight-loss surgery at his center in Los Angeles.</p>
+                        <p>One of the first specialized bariatric surgery centers in the world.</p>
+                        <p>Began developing what would become the Fobi Pouch.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">1980s-90s</div>
-                    <h4 class="timeline-title">Surgeon to the Stars</h4>
-                    <p class="timeline-description">Performed weight-loss surgeries on celebrities including Roseanne Barr, Randy Jackson, and Jennifer Holiday, helping destigmatize bariatric surgery.</p>
+                    <h4 class="timeline-title">Surgeon to the Stars <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Performed surgeries on Roseanne Barr, Randy Jackson, Jennifer Holiday.</p>
+                    <div class="timeline-details">
+                        <p>His skill and discretion attracted high-profile clients.</p>
+                        <p>Performed life-changing surgeries on numerous celebrities.</p>
+                        <p>Helped destigmatize weight-loss surgery in the public eye.</p>
+                        <p>Brought mainstream attention to bariatric surgery benefits.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">2005-2009</div>
-                    <h4 class="timeline-title">Global Leadership</h4>
-                    <p class="timeline-description">President of ASMBS Foundation (2005-2007) and President of IFSO (International Federation for Surgery of Obesity) (2008-2009).</p>
+                    <h4 class="timeline-title">Global Leadership <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">President of ASMBS Foundation and IFSO.</p>
+                    <div class="timeline-details">
+                        <p>ASMBS Foundation President (2005-2007).</p>
+                        <p>IFSO President - International Federation for Surgery of Obesity (2008-2009).</p>
+                        <p>Shaped global standards and practices in bariatric surgery.</p>
+                        <p>Mentored surgeons worldwide through leadership roles.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">2013-2015</div>
-                    <h4 class="timeline-title">IFSO Board Chair &amp; Lifetime Honors</h4>
-                    <p class="timeline-description">Chaired the IFSO Board of Trustees and received ASMBS Lifetime Achievement Award and IFSO Lifetime Membership.</p>
+                    <h4 class="timeline-title">IFSO Board Chair & Lifetime Honors <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Chaired IFSO Board, received Lifetime Achievement Awards.</p>
+                    <div class="timeline-details">
+                        <p>Chaired the IFSO Board of Trustees.</p>
+                        <p>Received ASMBS Lifetime Achievement Award.</p>
+                        <p>Honored with IFSO Lifetime Membership.</p>
+                        <p>Recognition for transformative contributions to metabolic and bariatric surgery.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" onclick="toggleTimeline(this)">
                 <div class="timeline-content">
                     <div class="timeline-year">Present</div>
-                    <h4 class="timeline-title">Director &amp; Mentor</h4>
-                    <p class="timeline-description">Director of Clinical Affairs &amp; Research at Mohak Bariatrics, Indore, India. Continues mentoring surgeons worldwide and leading philanthropic efforts through NGWEBIFOR Foundation.</p>
+                    <h4 class="timeline-title">Director & Mentor <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                    <p class="timeline-description">Director at Mohak Bariatrics, Indore, India.</p>
+                    <div class="timeline-details">
+                        <p>Director of Clinical Affairs & Research at Mohak Bariatrics and Robotics.</p>
+                        <p>Continues mentoring the next generation of surgeons.</p>
+                        <p>Leads philanthropic efforts through NGWEBIFOR Foundation.</p>
+                        <p>Still actively changing lives through medicine and mentorship.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -991,6 +1228,43 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <div class="section-icon"><i class="fas fa-comments"></i></div>
+            <h2 class="section-title">Share Your Story</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="testimonials-container">
+            <div class="testimonial-form">
+                <h3>Leave a Tribute or Memory</h3>
+                <form id="testimonialForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship">Your Relationship to Dr. Fobi</label>
+                        <input type="text" id="relationship" name="relationship" placeholder="e.g., Patient, Student, Family Friend, Colleague">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Share your memory, story, or message for Dr. Fobi..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Tribute</button>
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Thank you for sharing your story! Your tribute has been added.
+                    </div>
+                </form>
+            </div>
+
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonials will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
     <!-- Family Section -->
     <section class="family" id="family">
         <div class="section-header">
@@ -1018,7 +1292,7 @@
                 <img src="photos/Dr&Wife.jpg" alt="Dr. Fobi with Wife" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                 <div class="photo-overlay">
                     <h4>Together in Love</h4>
-                    <p>With his beloved wife</p>
+                    <p>With his beloved wife Helen</p>
                 </div>
             </div>
 
@@ -1026,7 +1300,7 @@
                 <img src="photos/FamilyShowcase3.jpg" alt="Family Heritage" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                 <div class="photo-overlay">
                     <h4>Heritage</h4>
-                    <p>Cultural pride</p>
+                    <p>Cultural pride from Nkwen</p>
                 </div>
             </div>
 
@@ -1034,7 +1308,7 @@
                 <img src="photos/Fammilyshowcase2.jpg" alt="Family Love" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                 <div class="photo-overlay">
                     <h4>Together</h4>
-                    <p>Family love</p>
+                    <p>Family love and unity</p>
                 </div>
             </div>
         </div>
@@ -1169,6 +1443,71 @@
             });
         });
 
+        // Timeline expand/collapse
+        function toggleTimeline(element) {
+            const content = element.querySelector('.timeline-content');
+            content.classList.toggle('expanded');
+        }
+
+        // Testimonials functionality
+        function loadTestimonials() {
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            const stored = localStorage.getItem('fobiTestimonials');
+            const testimonials = stored ? JSON.parse(stored) : [];
+
+            if (testimonials.length === 0) {
+                testimonialsGrid.innerHTML = '<div class="no-testimonials">No stories yet. Be the first to share your memory of Dr. Fobi!</div>';
+                return;
+            }
+
+            testimonialsGrid.innerHTML = testimonials.map(t => `
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"${t.message}"</p>
+                    <p class="testimonial-author">— ${t.name}${t.relationship ? `, ${t.relationship}` : ''}</p>
+                    <p class="testimonial-date">${new Date(t.date).toLocaleDateString()}</p>
+                </div>
+            `).join('');
+        }
+
+        // Handle testimonial form submission
+        document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const relationship = document.getElementById('relationship').value;
+            const message = document.getElementById('message').value;
+
+            const newTestimonial = {
+                name,
+                relationship,
+                message,
+                date: new Date().toISOString()
+            };
+
+            const stored = localStorage.getItem('fobiTestimonials');
+            const testimonials = stored ? JSON.parse(stored) : [];
+            testimonials.unshift(newTestimonial);
+            localStorage.setItem('fobiTestimonials', JSON.stringify(testimonials));
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            // Reset form
+            this.reset();
+
+            // Reload testimonials
+            loadTestimonials();
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        });
+
+        // Load testimonials on page load
+        loadTestimonials();
+
         // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -1184,7 +1523,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.timeline-item, .legacy-card, .wish-card').forEach(el => {
+        document.querySelectorAll('.timeline-item, .legacy-card, .wish-card, .testimonial-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
