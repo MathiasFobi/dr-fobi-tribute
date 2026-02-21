@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Mathias Fobi | A Life of Healing & Legacy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #C9A961;
+            --gold-light: #E8D5A3;
+            --navy: #1A2A3A;
+            --navy-light: #2D3E4F;
+            --cream: #FAF8F5;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #6B7B8C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 42, 58, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23C9A961" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: 200px;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 2;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 5px solid var(--gold);
+            object-fit: cover;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .hero-photo-placeholder {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 5px solid var(--gold);
+            background: linear-gradient(135deg, var(--navy-light), var(--navy));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .hero-photo-placeholder i {
+            font-size: 6rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .birthday-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            color: var(--gold);
+            font-size: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--navy-light), var(--navy));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-image-placeholder i {
+            font-size: 5rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Career Section */
+        .career {
+            background: var(--cream);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gold);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem 2rem;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            max-width: 400px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -40px;
+        }
+
+        .timeline-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin: 0.5rem 0;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Legacy Section */
+        .legacy {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+        }
+
+        .legacy .section-title {
+            color: var(--white);
+        }
+
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .legacy-card {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .legacy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            border-color: var(--gold);
+        }
+
+        .legacy-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .legacy-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legacy-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+
+        /* Family Section */
+        .family {
+            background: var(--white);
+        }
+
+        .family-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .family-photos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-card-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--navy-light), var(--navy));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-card-placeholder i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(26, 42, 58, 0.9));
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .photo-overlay h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .photo-overlay p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Birthday Celebration Section */
+        .celebration {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .celebration-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .birthday-message {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .birthday-date {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .wish-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            text-align: left;
+            border-left: 4px solid var(--gold);
+        }
+
+        .wish-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .wish-author {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .gallery .section-title {
+            color: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--navy-light), var(--navy));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item-placeholder i {
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 42, 58, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: var(--gold);
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .footer-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 2rem;
+        }
+
+        .footer-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content::before {
+                left: -30px !important;
+                right: auto !important;
+            }
+
+            .legacy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .family-photos,
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .family-photos,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Dr. M. Fobi</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#career">Career</a></li>
+                <li><a href="#legacy">Legacy</a></li>
+                <li><a href="#family">Family</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#celebration">Celebration</a></li>
+            </ul>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="photos/TopPicture.jpg" alt="Dr. Mathias Fobi" class="hero-photo">
+
+            <p class="hero-subtitle">Celebrating a Life of Service</p>
+            <h1 class="hero-title">Dr. Mathias Fobi</h1>
+            <p class="hero-tagline">"The art of medicine consists of amusing the patient while nature cures the disease."</p>
+
+            <div class="birthday-badge">
+                <i class="fas fa-birthday-cake"></i> September 21, 1946
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="photos/niceshot.jpg" alt="Dr. Mathias Fobi" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+            </div>
+            <div class="about-content">
+                <h3>A Distinguished Medical Career</h3>
+                <p>
+                    Dr. Mathias Fobi has dedicated his life to the noble profession of healing.
+                    Born on September 21, 1946, he has touched countless lives through his
+                    exceptional surgical skills and compassionate patient care.
+                </p>
+                <p>
+                    His journey in medicine represents the very best of the healing arts-
+                    combining technical excellence with genuine empathy for those in need.
+                    Throughout his distinguished career, Dr. Fobi has remained committed to
+                    advancing medical knowledge and mentoring the next generation of physicians.
+                </p>
+                <p>
+                    His contributions to the medical field extend beyond the operating room,
+                    encompassing research, education, and community service that have left
+                    an indelible mark on healthcare.
+                </p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Years in Medicine</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Lives Touched</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Hearts Healed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Timeline -->
+    <section class="career" id="career">
+        <div class="section-header">
+            <div class="section-icon"><i class="fas fa-stethoscope"></i></div>
+            <h2 class="section-title">Medical Journey</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="timeline">
+            <!-- Timeline items - customize with actual dates -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1970s</div>
+                    <h4 class="timeline-title">Medical Education</h4>
+                    <p class="timeline-description">Began his journey in medicine, earning his medical degree and beginning his residency training.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1980s</div>
+                    <h4 class="timeline-title">Surgical Excellence</h4>
+                    <p class="timeline-description">Established himself as a skilled surgeon, developing expertise in [specialty area].</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1990s</div>
+                    <h4 class="timeline-title">Leadership & Innovation</h4>
+                    <p class="timeline-description">Took on leadership roles in medical institutions, pioneering new surgical techniques.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2000s-Present</div>
+                    <h4 class="timeline-title">Legacy of Healing</h4>
+                    <p class="timeline-description">Continues to practice medicine while mentoring young physicians and contributing to medical literature.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legacy Section -->
+    <section class="legacy" id="legacy">
+        <div class="section-header">
+            <div class="section-icon"><i class="fas fa-star"></i></div>
+            <h2 class="section-title">Lasting Legacy</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="legacy-grid">
+            <div class="legacy-card">
+                <div class="legacy-icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Patient Care</h3>
+                <p>Known for treating every patient with dignity, compassion, and the highest standard of medical excellence.</p>
+            </div>
+
+            <div class="legacy-card">
+                <div class="legacy-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Medical Education</h3>
+                <p>Mentored countless medical students and residents, shaping the future of medicine through teaching.</p>
+            </div>
+
+            <div class="legacy-card">
+                <div class="legacy-icon"><i class="fas fa-heart"></i></div>
+                <h3>Humanitarian Work</h3>
+                <p>Dedicated to making healthcare accessible and serving underserved communities with skill and kindness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Section -->
+    <section class="family" id="family">
+        <div class="section-header">
+            <div class="section-icon"><i class="fas fa-users"></i></div>
+            <h2 class="section-title">Family & Heritage</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <p class="family-intro">
+            Beyond his professional achievements, Dr. Fobi is a beloved family man whose wisdom,
+            kindness, and humor have enriched the lives of all who know him. His cultural heritage
+            and family values have been the foundation of his remarkable life.
+        </p>
+
+        <div class="family-photos">
+            <div class="photo-card">
+                <img src="photos/FamilyShowase.jpg" alt="Dr. Fobi with Family" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="photo-overlay">
+                    <h4>Family Gathering</h4>
+                    <p>A cherished memory</p>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="photos/Dr&Wife.jpg" alt="Dr. Fobi with Wife" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="photo-overlay">
+                    <h4>Together in Love</h4>
+                    <p>With his beloved wife</p>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="photos/FamilyShowcase3.jpg" alt="Family Heritage" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="photo-overlay">
+                    <h4>Heritage</h4>
+                    <p>Cultural pride</p>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="photos/Fammilyshowcase2.jpg" alt="Family Love" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="photo-overlay">
+                    <h4>Together</h4>
+                    <p>Family love</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <div class="section-icon"><i class="fas fa-images"></i></div>
+            <h2 class="section-title">Photo Gallery</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="photos/DrShowcase.jpg" alt="Professional Showcase" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/workshowcase.jpg" alt="At Work" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/DoctorShowcase.jpg" alt="Doctor Showcase" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/showcase.jpg" alt="Career Highlights" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/DrHeritage.jpg" alt="Heritage" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photos/ealier years.jpg" alt="Earlier Years" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                <div class="gallery-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Birthday Celebration -->
+    <section class="celebration" id="celebration">
+        <div class="celebration-content">
+            <div class="section-header">
+                <div class="section-icon"><i class="fas fa-birthday-cake"></i></div>
+                <h2 class="section-title">Birthday Celebration</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <p class="birthday-message">
+                "To a remarkable man who has dedicated his life to healing others-
+                may your birthday be filled with the love and joy you so generously give."
+            </p>
+
+            <p class="birthday-date">
+                <i class="fas fa-calendar-star"></i> September 21, 1946
+            </p>
+
+            <div class="wishes-container">
+                <div class="wish-card">
+                    <p class="wish-text">
+                        "Happy Birthday to an incredible uncle, mentor, and healer.
+                        Your life's work has inspired us all. Wishing you health, happiness,
+                        and many more years of touching lives."
+                    </p>
+                    <p class="wish-author">- From Your Loving Family</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-quote">
+                "Wherever the art of medicine is loved, there is also a love of humanity."
+            </p>
+            <div class="footer-line"></div>
+            <p class="footer-text">
+                Celebrating the life and legacy of Dr. Mathias Fobi<br>
+                A healer, mentor, and beloved family member
+            </p>
+            <p class="footer-copyright">
+                Created with love by family | September 2026
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item, .legacy-card, .wish-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
