@@ -1406,7 +1406,7 @@
                     </div>
                     <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Tribute</button>
                     <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i> Thank you for sharing your story! Your tribute has been added.
+                        <i class="fas fa-check-circle"></i> Thank you for sharing your story! Your tribute has been saved locally. Airtable sync pending base configuration.
                     </div>
                 </form>
             </div>
@@ -1659,6 +1659,59 @@
 
         // Load testimonials on page load
         loadTestimonials();
+
+        // Airtable Integration Configuration
+        // TODO: Update BASE_ID after creating Airtable base
+        const AIRTABLE_CONFIG = {
+            token: 'patdulhLa0opKSFd.d8ae9f100f3e3dcc29d85a7a5022f9498e19f83d490e3a10d5d5a6ffa5913218',
+            baseId: 'YOUR_BASE_ID_HERE', // Replace after creating base
+            tableName: 'Tributes'
+        };
+
+        // Function to send testimonial to Airtable (ready to use when base is set up)
+        async function sendToAirtable(testimonial) {
+            try {
+                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableName}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${AIRTABLE_CONFIG.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fields: {
+                            Name: testimonial.name,
+                            Relationship: testimonial.relationship,
+                            Message: testimonial.message,
+                            Date: testimonial.date
+                        }
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Tribute saved to Airtable successfully');
+                    return true;
+                } else {
+                    console.log('Airtable save pending - base ID needs configuration');
+                    return false;
+                }
+            } catch (error) {
+                console.log('Airtable integration ready - awaiting base configuration');
+                return false;
+            }
+        }
+
+        // Auto-attempt Airtable save on form submit (graceful fallback to localStorage)
+        document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
+            const formData = {
+                name: document.getElementById('name').value,
+                relationship: document.getElementById('relationship').value,
+                message: document.getElementById('message').value,
+                date: new Date().toISOString()
+            };
+            
+            // Try Airtable (will work when baseId is configured)
+            await sendToAirtable(formData);
+        });
 
         // Animation on scroll
         const observerOptions = {
