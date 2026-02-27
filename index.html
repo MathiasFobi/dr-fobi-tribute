@@ -1623,12 +1623,11 @@
 
         // Airtable Configuration
         const AIRTABLE_CONFIG = {
-            token: 'patdulhLa0opKSFd.d8ae9f100f3e3dcc29d85a7a5022f9498e19f83d490e3a10d5d5a6ffa5913218',
             baseId: 'apptkgKLvld8gf7vw',
             tableName: 'Tributes'
         };
 
-        // Handle testimonial form submission with Airtable + localStorage backup
+        // Handle testimonial form submission with API route + localStorage backup
         document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -1643,34 +1642,30 @@
                 date: new Date().toISOString()
             };
 
-            // Try to save to Airtable first
+            // Try to save via serverless API route (avoids CORS)
             let airtableSuccess = false;
+            let errorDetails = '';
             try {
-                const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableName}`, {
+                const response = await fetch('/api/submit-tribute', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${AIRTABLE_CONFIG.token}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        fields: {
-                            Name: name,
-                            Relationship: relationship,
-                            Message: message,
-                            Date: newTestimonial.date
-                        }
-                    })
+                    body: JSON.stringify({ name, relationship, message })
                 });
                 
-                if (response.ok) {
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
                     airtableSuccess = true;
-                    console.log('Saved to Airtable successfully');
+                    console.log('Saved to Airtable via API:', result);
                 } else {
-                    const errorText = await response.text();
-                    console.log('Airtable error:', response.status, errorText);
+                    errorDetails = result.error || 'Unknown error';
+                    console.log('API error:', errorDetails, result.details);
                 }
             } catch (error) {
-                console.log('Airtable fetch error:', error);
+                errorDetails = error.message;
+                console.log('Fetch error:', error);
             }
 
             // Always save to localStorage as backup
@@ -1682,9 +1677,9 @@
             // Show appropriate success message
             const successMessage = document.getElementById('successMessage');
             if (airtableSuccess) {
-                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved to Airtable and locally.';
+                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved.';
             } else {
-                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved locally. Airtable sync pending.';
+                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved locally. (Airtable: ' + errorDetails + ')';
             }
             successMessage.classList.add('show');
 
