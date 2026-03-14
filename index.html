@@ -937,10 +937,42 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 42, 58, 0.98);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+                width: 100%;
+            }
+
+            .nav-links a:hover {
+                background: rgba(201, 169, 97, 0.1);
             }
 
             .mobile-menu-btn {
                 display: block;
+            }
+
+            .mobile-menu-btn.active i::before {
+                content: "\f00d";
             }
 
             .hero-title {
@@ -1571,6 +1603,23 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
