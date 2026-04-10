@@ -937,10 +937,42 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 42, 58, 0.98);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+                width: 100%;
+            }
+
+            .nav-links a:hover {
+                background: rgba(201, 169, 97, 0.1);
             }
 
             .mobile-menu-btn {
                 display: block;
+            }
+
+            .mobile-menu-btn.active i::before {
+                content: "\f00d";
             }
 
             .hero-title {
@@ -974,6 +1006,7 @@
             <a href="#" class="logo">Dr. M. Fobi</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+
                 <li><a href="#event">Event</a></li>
                 <li><a href="#beacon-of-hope">Beacon</a></li>
                 <li><a href="#about">About</a></li>
@@ -1078,7 +1111,7 @@
                     Celebrating 80 Years of Impact, Leadership, Family & Service
                 </p>
                 <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8);">
-                    <i class="fas fa-calendar-alt"></i> September 23–25, 2026 | <i class="fas fa-map-marker-alt"></i> Atlanta, Georgia
+                    <i class="fas fa-calendar-alt"></i> September 25–27, 2026 | <i class="fas fa-map-marker-alt"></i> Atlanta, Georgia
                 </p>
                 <p style="font-size: 1rem; color: rgba(255,255,255,0.7); margin-top: 1rem;">
                     <i class="fas fa-hotel"></i> Atlanta Marriott Northwest at Galleria
@@ -1100,7 +1133,7 @@
                 <!-- Day 1 -->
                 <div class="event-day" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 2.5rem; margin-bottom: 2rem; border-left: 5px solid #C9A961;">
                     <h4 style="color: #E8D5A3; font-size: 1.5rem; margin-bottom: 1rem;">
-                        <i class="fas fa-calendar-day"></i> DAY 1 — FRIDAY, SEPTEMBER 23, 2026
+                        <i class="fas fa-calendar-day"></i> DAY 1 — FRIDAY, SEPTEMBER 25, 2026
                     </h4>
                     <p style="color: #C9A961; font-weight: 600; margin-bottom: 1rem;">Legacy • Impact</p>
                     <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.9);">
@@ -1115,7 +1148,7 @@
                 <!-- Day 2 -->
                 <div class="event-day" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 2.5rem; margin-bottom: 2rem; border-left: 5px solid #E8D5A3;">
                     <h4 style="color: #E8D5A3; font-size: 1.5rem; margin-bottom: 1rem;">
-                        <i class="fas fa-calendar-day"></i> DAY 2 — SATURDAY, SEPTEMBER 24, 2026
+                        <i class="fas fa-calendar-day"></i> DAY 2 — SATURDAY, SEPTEMBER 26, 2026
                     </h4>
                     <p style="color: #C9A961; font-weight: 600; margin-bottom: 1rem;">Impact • Faith • Celebration</p>
                     <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.9);">
@@ -1130,7 +1163,7 @@
                 <!-- Day 3 -->
                 <div class="event-day" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 2.5rem; margin-bottom: 2rem; border-left: 5px solid #C9A961;">
                     <h4 style="color: #E8D5A3; font-size: 1.5rem; margin-bottom: 1rem;">
-                        <i class="fas fa-calendar-day"></i> DAY 3 — SUNDAY, SEPTEMBER 25, 2026
+                        <i class="fas fa-calendar-day"></i> DAY 3 — SUNDAY, SEPTEMBER 27, 2026
                     </h4>
                     <p style="color: #C9A961; font-weight: 600; margin-bottom: 1rem;">Gratitude • Farewell</p>
                     <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.9);">
@@ -1569,6 +1602,23 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
