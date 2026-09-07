@@ -1012,6 +1012,7 @@
                 <li><a href="#career">Career</a></li>
                 <li><a href="#legacy">Legacy</a></li>
                 <li><a href="#testimonials">Stories</a></li>
+                <li><a href="/tribute">Tribute</a></li>
                 <li><a href="#family">Family</a></li>
                 <li><a href="#gallery">Gallery</a></li>
             </ul>
@@ -1575,78 +1576,87 @@
             `).join('');
         }
 
-        // Airtable Configuration
-        const AIRTABLE_CONFIG = {
-            baseId: 'apptkgKLvld8gf7vw',
-            tableName: 'Tributes'
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDR9ZTR7iADGtWxtJUASTkKsVVl37lXBao",
+            authDomain: "drmal-b8f0d.firebaseapp.com",
+            projectId: "drmal-b8f0d",
+            storageBucket: "drmal-b8f0d.firebasestorage.app",
+            messagingSenderId: "475817586363",
+            appId: "1:475817586363:web:a4e4adcbd74f7f7428439e",
+            measurementId: "G-FJYBNEYMLC"
         };
 
-        // Handle testimonial form submission with API route + localStorage backup
-        document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        // Firebase SDK
+        import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js").then(({ initializeApp }) => {
+            return import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(({ getFirestore, collection, addDoc, serverTimestamp }) => {
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app);
 
-            const name = document.getElementById('name').value;
-            const relationship = document.getElementById('relationship').value;
-            const message = document.getElementById('message').value;
+                document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
 
-            const newTestimonial = {
-                name,
-                relationship,
-                message,
-                date: new Date().toISOString()
-            };
+                    const name = document.getElementById('name').value;
+                    const relationship = document.getElementById('relationship').value;
+                    const message = document.getElementById('message').value;
 
-            // Try to save via serverless API route (avoids CORS)
-            let airtableSuccess = false;
-            let errorDetails = '';
-            try {
-                const response = await fetch('/api/submit-tribute', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, relationship, message })
+                    const newTestimonial = {
+                        name,
+                        relationship,
+                        message,
+                        date: new Date().toISOString()
+                    };
+
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const successMessage = document.getElementById('successMessage');
+                    const originalText = submitBtn.innerHTML;
+
+                    // Loading state
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    successMessage.classList.remove('show');
+
+                    let firebaseSuccess = false;
+                    let errorDetails = '';
+
+                    // Try Firestore
+                    try {
+                        await addDoc(collection(db, 'tributes'), {
+                            name,
+                            relationship: relationship || '',
+                            message,
+                            createdAt: serverTimestamp()
+                        });
+                        firebaseSuccess = true;
+                    } catch (error) {
+                        errorDetails = error.message;
+                        console.log('Firestore error:', error);
+                    }
+
+                    // Always save to localStorage as backup
+                    const stored = localStorage.getItem('fobiTestimonials');
+                    const testimonials = stored ? JSON.parse(stored) : [];
+                    testimonials.unshift(newTestimonial);
+                    localStorage.setItem('fobiTestimonials', JSON.stringify(testimonials));
+
+                    // Show appropriate success message
+                    if (firebaseSuccess) {
+                        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved permanently.';
+                    } else {
+                        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Saved locally. (Cloud sync: ' + errorDetails + ')';
+                    }
+                    successMessage.classList.add('show');
+
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                    this.reset();
+                    loadTestimonials();
+
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                    }, 3000);
                 });
-                
-                const result = await response.json();
-                
-                if (response.ok && result.success) {
-                    airtableSuccess = true;
-                    console.log('Saved to Airtable via API:', result);
-                } else {
-                    errorDetails = result.error || 'Unknown error';
-                    console.log('API error:', errorDetails, result.details);
-                }
-            } catch (error) {
-                errorDetails = error.message;
-                console.log('Fetch error:', error);
-            }
-
-            // Always save to localStorage as backup
-            const stored = localStorage.getItem('fobiTestimonials');
-            const testimonials = stored ? JSON.parse(stored) : [];
-            testimonials.unshift(newTestimonial);
-            localStorage.setItem('fobiTestimonials', JSON.stringify(testimonials));
-
-            // Show appropriate success message
-            const successMessage = document.getElementById('successMessage');
-            if (airtableSuccess) {
-                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved.';
-            } else {
-                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved locally. (Airtable: ' + errorDetails + ')';
-            }
-            successMessage.classList.add('show');
-
-            // Reset form
-            this.reset();
-
-            // Reload testimonials
-            loadTestimonials();
-
-            // Hide success message after 3 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
+            });
         });
 
         // Load testimonials on page load
