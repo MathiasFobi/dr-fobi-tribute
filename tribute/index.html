@@ -188,6 +188,115 @@
             resize: vertical;
         }
 
+        /* Image Upload */
+        .image-upload-wrapper {
+            position: relative;
+        }
+
+        .image-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1rem;
+            border: 2px dashed rgba(201, 169, 97, 0.4);
+            border-radius: 8px;
+            background: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .image-upload-label:hover {
+            border-color: var(--gold);
+            background: rgba(201, 169, 97, 0.05);
+            color: var(--text-dark);
+        }
+
+        .image-upload-label.has-file {
+            border-color: var(--gold);
+            border-style: solid;
+            background: rgba(201, 169, 97, 0.08);
+            color: var(--navy);
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .image-preview {
+            margin-top: 0.8rem;
+            display: none;
+            position: relative;
+        }
+
+        .image-preview.show {
+            display: block;
+        }
+
+        .image-preview img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .image-preview .remove-image {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(26, 42, 58, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .image-preview .remove-image:hover {
+            background: #e53e3e;
+        }
+
+        .upload-progress {
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .upload-progress.show {
+            display: block;
+        }
+
+        .upload-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(201, 169, 97, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .upload-progress-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .upload-progress-text {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+            text-align: center;
+        }
+
+        /* Submit Button */
         .submit-btn {
             background: var(--gold);
             color: var(--navy);
@@ -286,6 +395,21 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
+        .tribute-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            display: block;
+            cursor: pointer;
+            transition: border-radius 0.3s;
+        }
+
+        .tribute-image:hover {
+            border-radius: 4px;
+        }
+
         .tribute-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.15rem;
@@ -359,7 +483,6 @@
             font-size: 1rem;
         }
 
-        /* Firebase error state */
         .firebase-error {
             background: #fff3f3;
             border: 1px solid #e53e3e;
@@ -373,7 +496,6 @@
 
         .firebase-error.show { display: block; }
 
-        /* Back link */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -388,7 +510,6 @@
 
         .back-link:hover { color: var(--gold); }
 
-        /* Footer */
         footer {
             background: var(--navy);
             color: var(--white);
@@ -406,9 +527,38 @@
             color: var(--gold);
             text-decoration: none;
         }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Full size image">
+    </div>
+
     <!-- Nav -->
     <nav>
         <div class="nav-container">
@@ -427,7 +577,7 @@
     <div class="page-hero">
         <div class="page-icon"><i class="fas fa-heart"></i></div>
         <h1>Share Your Tribute</h1>
-        <p>Leave a message, memory, or word of celebration for Dr. Mathias Fobi — a surgeon, mentor, and beloved figure.</p>
+        <p>Leave a message, memory, or photo for Dr. Mathias Fobi — a surgeon, mentor, and beloved figure.</p>
     </div>
 
     <!-- Main Layout -->
@@ -438,7 +588,7 @@
             <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
             <div class="form-card">
                 <h2>Leave a Tribute</h2>
-                <p class="subtitle">Your words will be saved permanently and displayed on the tribute wall.</p>
+                <p class="subtitle">Your words and photos will be saved permanently.</p>
 
                 <form id="tributeForm">
                     <div class="form-group">
@@ -466,6 +616,31 @@
                         <label for="message">Your Message *</label>
                         <textarea id="message" placeholder="Share a memory, a story, or a word of celebration..." required></textarea>
                     </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label>Attach a Photo (optional)</label>
+                        <div class="image-upload-wrapper">
+                            <label class="image-upload-label" id="uploadLabel" for="imageInput">
+                                <i class="fas fa-camera"></i>
+                                <span id="uploadLabelText">Choose a photo...</span>
+                            </label>
+                            <input type="file" id="imageInput" accept="image/*" capture="environment">
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImg" src="" alt="Preview">
+                                <button type="button" class="remove-image" onclick="removeImage(event)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="upload-progress" id="uploadProgress">
+                                <div class="upload-progress-bar">
+                                    <div class="upload-progress-fill" id="uploadProgressFill"></div>
+                                </div>
+                                <p class="upload-progress-text" id="uploadProgressText">Uploading...</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="submit-btn" id="submitBtn">
                         <i class="fas fa-paper-plane"></i>
                         <span>Submit Tribute</span>
@@ -476,7 +651,7 @@
                     </div>
                     <div class="firebase-error" id="firebaseError">
                         <i class="fas fa-exclamation-circle"></i>
-                        <span id="errorText">Firebase error. Please try again.</span>
+                        <span id="errorText">An error occurred. Please try again.</span>
                     </div>
                 </form>
             </div>
@@ -486,7 +661,7 @@
         <div>
             <div class="wall-header">
                 <h2>Tribute Wall</h2>
-                <p>Messages from people whose lives Dr. Fobi has touched.</p>
+                <p>Messages and photos from people Dr. Fobi has touched.</p>
             </div>
 
             <div class="tribute-count" id="tributeCount">
@@ -513,18 +688,23 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import {
             getFirestore,
+            getStorage,
             collection,
             addDoc,
             query,
             orderBy,
             onSnapshot,
             serverTimestamp,
-            getDocs
         } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import {
+            ref,
+            uploadBytesResumable,
+            getDownloadURL,
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyDR9ZTR7iADGtWxtJUASTkKsVVl37lXBao",
+            apiKey: "AIzaSy…XBao",
             authDomain: "drmal-b8f0d.firebaseapp.com",
             projectId: "drmal-b8f0d",
             storageBucket: "drmal-b8f0d.firebasestorage.app",
@@ -533,25 +713,84 @@
             measurementId: "G-FJYBNEYMLC"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        // ─── Load & Display Tributes ───
-        const wallGrid = document.getElementById('wallGrid');
-        const countNum = document.getElementById('countNum');
+        // ─── Image Preview ───
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const uploadLabel = document.getElementById('uploadLabel');
+        const uploadLabelText = document.getElementById('uploadLabelText');
 
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                previewImg.src = ev.target.result;
+                imagePreview.classList.add('show');
+                uploadLabel.classList.add('has-file');
+                uploadLabelText.textContent = file.name;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        window.removeImage = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            imageInput.value = '';
+            imagePreview.classList.remove('show');
+            previewImg.src = '';
+            uploadLabel.classList.remove('has-file');
+            uploadLabelText.textContent = 'Choose a photo...';
+        };
+
+        // ─── Render Tributes ───
         function formatDate(ts) {
             if (!ts) return '';
             const d = ts.toDate ? ts.toDate() : new Date(ts);
             return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         }
 
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
+        }
+
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('show');
+        }
+
+        window.closeLightbox = function() {
+            document.getElementById('lightbox').classList.remove('show');
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
         function renderTribute(doc) {
             const d = doc.data();
             const card = document.createElement('div');
             card.className = 'tribute-card';
+
+            let imageHtml = '';
+            if (d.imageUrl) {
+                imageHtml = `<img class="tribute-image" src="${escapeHtml(d.imageUrl)}" alt="Tribute photo" loading="lazy" onclick="openLightbox('${escapeHtml(d.imageUrl).replace(/'/g, "\\'")}')">`;
+            }
+
             card.innerHTML = `
+                ${imageHtml}
                 <p class="tribute-text">${escapeHtml(d.message || '')}</p>
                 <div class="tribute-meta">
                     <div>
@@ -565,13 +804,10 @@
             return card;
         }
 
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
+        // ─── Real-time Tribute Wall ───
+        const wallGrid = document.getElementById('wallGrid');
+        const countNum = document.getElementById('countNum');
 
-        // Real-time listener
         const q = query(collection(db, 'tributes'), orderBy('createdAt', 'desc'));
         onSnapshot(q, (snapshot) => {
             wallGrid.innerHTML = '';
@@ -595,7 +831,7 @@
             wallGrid.innerHTML = `
                 <div class="empty-wall">
                     <i class="fas fa-wifi" style="color: #e53e3e;"></i>
-                    <p style="color: #c53030;">Could not load tributes. Please check your connection and try again.</p>
+                    <p style="color: #c53030;">Could not load tributes. Please check your connection.</p>
                 </div>
             `;
         });
@@ -606,6 +842,9 @@
         const successMsg = document.getElementById('successMsg');
         const firebaseError = document.getElementById('firebaseError');
         const errorText = document.getElementById('errorText');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const uploadProgressFill = document.getElementById('uploadProgressFill');
+        const uploadProgressText = document.getElementById('uploadProgressText');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -614,35 +853,87 @@
             const relationship = document.getElementById('relationship').value;
             const location = document.getElementById('location').value.trim();
             const message = document.getElementById('message').value.trim();
+            const imageFile = document.getElementById('imageInput').files[0];
 
             if (!name || !message) return;
 
-            // UI: loading state
+            // Set loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             successMsg.classList.remove('show');
             firebaseError.classList.remove('show');
 
             try {
+                let imageUrl = '';
+
+                // Upload image first if present
+                if (imageFile) {
+                    const timestamp = Date.now();
+                    const safeName = imageFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
+                    const storageRef = ref(storage, `tributes/${timestamp}_${safeName}`);
+
+                    // Show progress
+                    uploadProgress.classList.add('show');
+                    uploadProgressFill.style.width = '10%';
+                    uploadProgressText.textContent = 'Uploading photo...';
+
+                    await new Promise((resolve, reject) => {
+                        const task = uploadBytesResumable(storageRef, imageFile);
+
+                        task.on('state_changed',
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                uploadProgressFill.style.width = Math.round(progress) + '%';
+                                uploadProgressText.textContent = `Uploading... ${Math.round(progress)}%`;
+                            },
+                            (error) => {
+                                reject(error);
+                            },
+                            async () => {
+                                try {
+                                    imageUrl = await getDownloadURL(task.snapshot.ref);
+                                    uploadProgressFill.style.width = '100%';
+                                    uploadProgressText.textContent = 'Photo uploaded!';
+                                    resolve();
+                                } catch (urlError) {
+                                    reject(urlError);
+                                }
+                            }
+                        );
+                    });
+                }
+
+                // Save tribute to Firestore
+                uploadProgressText.textContent = 'Saving tribute...';
+                uploadProgressFill.style.width = '90%';
+
                 await addDoc(collection(db, 'tributes'), {
                     name,
                     relationship: relationship || '',
                     location: location || '',
                     message,
+                    imageUrl: imageUrl || '',
                     createdAt: serverTimestamp()
                 });
 
                 // Success
+                uploadProgressFill.style.width = '100%';
+                uploadProgressText.textContent = 'Done!';
                 successMsg.classList.add('show');
                 form.reset();
+                removeImage({ preventDefault: () => {}, stopPropagation: () => {} });
 
             } catch (err) {
                 console.error('Submit error:', err);
-                errorText.textContent = 'Could not save tribute: ' + (err.message || 'Unknown error');
+                errorText.textContent = err.message || 'An error occurred. Please try again.';
                 firebaseError.classList.add('show');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Tribute';
+                setTimeout(() => {
+                    uploadProgress.classList.remove('show');
+                    uploadProgressFill.style.width = '0%';
+                }, 2000);
             }
         });
     </script>
