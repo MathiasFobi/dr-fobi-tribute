@@ -1589,9 +1589,9 @@
 
         // Firebase SDK
         import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js").then(({ initializeApp }) => {
-            return import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(({ getFirestore, collection, addDoc, serverTimestamp }) => {
+            return import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(({ initializeFirestore, collection, addDoc, serverTimestamp }) => {
                 const app = initializeApp(firebaseConfig);
-                const db = getFirestore(app);
+                const db = initializeFirestore(app, { databaseId: 'drmal' });
 
                 document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
                     e.preventDefault();
