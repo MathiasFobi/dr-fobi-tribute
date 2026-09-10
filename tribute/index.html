@@ -903,27 +903,43 @@
                     });
                 }
 
-                // Save tribute to Firestore with timeout fallback
+                // Save tribute to Firestore via REST API (bypasses SDK timing issues)
                 uploadProgressText.textContent = 'Saving tribute...';
                 uploadProgressFill.style.width = '90%';
 
-                let firestoreSuccess = false;
-                const firestorePromise = addDoc(collection(db, 'tributes'), {
+                const tributeData = {
                     name,
                     relationship: relationship || '',
                     location: location || '',
                     message,
                     imageUrl: imageUrl || '',
-                    createdAt: serverTimestamp()
-                });
+                    createdAt: new Date().toISOString()
+                };
 
-                // Race: wait max 15s for Firestore, then proceed anyway
-                await Promise.race([
-                    firestorePromise.then(() => { firestoreSuccess = true; }),
-                    new Promise(resolve => setTimeout(resolve, 15000))
-                ]);
+                const firestoreRes = await fetch(
+                    `https://firestore.googleapis.com/v1/projects/drmal-b8f0d/databases/drmal/documents/tributes?key=${firebaseConfig.apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            fields: {
+                                name: { stringValue: tributeData.name },
+                                relationship: { stringValue: tributeData.relationship },
+                                location: { stringValue: tributeData.location },
+                                message: { stringValue: tributeData.message },
+                                imageUrl: { stringValue: tributeData.imageUrl },
+                                createdAt: { timestampValue: tributeData.createdAt }
+                            }
+                        })
+                    }
+                );
 
-                // Success (or timeout — show success anyway since image is in Storage)
+                if (!firestoreRes.ok) {
+                    const errText = await firestoreRes.text();
+                    throw new Error('Firestore write failed: ' + errText);
+                }
+
+                // Success
                 uploadProgressFill.style.width = '100%';
                 uploadProgressText.textContent = 'Done!';
                 successMsg.classList.add('show');
