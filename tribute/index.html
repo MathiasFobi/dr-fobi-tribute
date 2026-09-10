@@ -189,11 +189,13 @@
         }
 
         /* Image Upload */
-        .image-upload-wrapper {
-            position: relative;
+        .multi-image-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
-        .image-upload-label {
+        .multi-upload-label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -207,60 +209,61 @@
             font-size: 0.9rem;
         }
 
-        .image-upload-label:hover {
-            border-color: var(--gold);
-            background: rgba(201, 169, 97, 0.05);
-            color: var(--text-dark);
-        }
-
-        .image-upload-label.has-file {
+        .multi-upload-label.has-file {
             border-color: var(--gold);
             border-style: solid;
             background: rgba(201, 169, 97, 0.08);
             color: var(--navy);
         }
 
-        #imageInput {
-            display: none;
+        .multi-upload-label:hover {
+            border-color: var(--gold);
+            background: rgba(201, 169, 97, 0.05);
+            color: var(--text-dark);
         }
 
-        .image-preview {
-            margin-top: 0.8rem;
-            display: none;
+        #imageInput { display: none; }
+
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.6rem;
+        }
+
+        .image-preview-item {
             position: relative;
-        }
-
-        .image-preview.show {
-            display: block;
-        }
-
-        .image-preview img {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
+            aspect-ratio: 1;
             border-radius: 8px;
+            overflow: hidden;
             border: 1px solid rgba(201, 169, 97, 0.3);
         }
 
-        .image-preview .remove-image {
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-preview-item .remove-image {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 4px;
+            right: 4px;
             background: rgba(26, 42, 58, 0.85);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
         }
 
-        .image-preview .remove-image:hover {
+        .image-preview-item .remove-image:hover {
             background: #e53e3e;
         }
 
@@ -400,10 +403,24 @@
             max-height: 300px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 1.2rem;
             display: block;
             cursor: pointer;
             transition: border-radius 0.3s;
+        }
+
+        .tribute-images-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tribute-images-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
         .tribute-image:hover {
@@ -619,24 +636,19 @@
 
                     <!-- Image Upload -->
                     <div class="form-group">
-                        <label>Attach a Photo (optional)</label>
-                        <div class="image-upload-wrapper">
-                            <label class="image-upload-label" id="uploadLabel" for="imageInput">
+                        <label>Attach Photos (up to 5, optional)</label>
+                        <div class="multi-image-wrapper">
+                            <label class="image-upload-label multi-upload-label" id="uploadLabel" for="imageInput">
                                 <i class="fas fa-camera"></i>
-                                <span id="uploadLabelText">Choose a photo...</span>
+                                <span id="uploadLabelText">Choose up to 5 photos...</span>
                             </label>
-                            <input type="file" id="imageInput" accept="image/*">
-                            <div class="image-preview" id="imagePreview">
-                                <img id="previewImg" src="" alt="Preview">
-                                <button type="button" class="remove-image" onclick="removeImage(event)">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
+                            <input type="file" id="imageInput" accept="image/*" multiple>
+                            <div class="image-preview-grid" id="imagePreviewGrid"></div>
                             <div class="upload-progress" id="uploadProgress">
                                 <div class="upload-progress-bar">
                                     <div class="upload-progress-fill" id="uploadProgressFill"></div>
                                 </div>
-                                <p class="upload-progress-text" id="uploadProgressText">Uploading...</p>
+                                <p class="upload-progress-text" id="uploadProgressText">Uploading photos...</p>
                             </div>
                         </div>
                     </div>
@@ -719,38 +731,56 @@
 
         // ─── Image Preview ───
         const imageInput = document.getElementById('imageInput');
-        const imagePreview = document.getElementById('imagePreview');
-        const previewImg = document.getElementById('previewImg');
+        const imagePreviewGrid = document.getElementById('imagePreviewGrid');
         const uploadLabel = document.getElementById('uploadLabel');
         const uploadLabelText = document.getElementById('uploadLabelText');
+        let selectedFiles = [];
+
+        function renderImagePreviews() {
+            imagePreviewGrid.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const div = document.createElement('div');
+                    div.className = 'image-preview-item';
+                    div.innerHTML = `<img src="${ev.target.result}" alt="Preview ${index+1}">
+                        <button type="button" class="remove-image" onclick="removeImageByIndex(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>`;
+                    imagePreviewGrid.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+            if (selectedFiles.length > 0) {
+                uploadLabel.classList.add('has-file');
+                uploadLabelText.textContent = `${selectedFiles.length} photo${selectedFiles.length > 1 ? 's' : ''} selected`;
+            } else {
+                uploadLabel.classList.remove('has-file');
+                uploadLabelText.textContent = 'Choose up to 5 photos...';
+            }
+        }
 
         imageInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file.');
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            const nonImages = files.filter(f => !f.type.startsWith('image/'));
+            if (nonImages.length) { alert('Please select only image files.'); return; }
+            const remaining = 5 - selectedFiles.length;
+            if (files.length > remaining) {
+                alert(`You can only add ${remaining} more photo${remaining !== 1 ? 's' : ''} (max 5).`);
+                imageInput.value = '';
                 return;
             }
-
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                previewImg.src = ev.target.result;
-                imagePreview.classList.add('show');
-                uploadLabel.classList.add('has-file');
-                uploadLabelText.textContent = file.name;
-            };
-            reader.readAsDataURL(file);
+            files.forEach(file => {
+                if (selectedFiles.length < 5) selectedFiles.push(file);
+            });
+            renderImagePreviews();
+            imageInput.value = '';
         });
 
-        window.removeImage = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            imageInput.value = '';
-            imagePreview.classList.remove('show');
-            previewImg.src = '';
-            uploadLabel.classList.remove('has-file');
-            uploadLabelText.textContent = 'Choose a photo...';
+        window.removeImageByIndex = function(index) {
+            selectedFiles.splice(index, 1);
+            renderImagePreviews();
         };
 
         // ─── Render Tributes ───
@@ -784,13 +814,23 @@
             const card = document.createElement('div');
             card.className = 'tribute-card';
 
-            let imageHtml = '';
-            if (d.imageUrl) {
-                imageHtml = `<img class="tribute-image" src="${escapeHtml(d.imageUrl)}" alt="Tribute photo" loading="lazy" onclick="openLightbox('${escapeHtml(d.imageUrl).replace(/'/g, "\\'")}')">`;
+            // Handle both single imageUrl and multiple imageUrls (comma-separated)
+            let images = [];
+            if (d.imageUrl) images = [d.imageUrl];
+            if (d.imageUrls) images = d.imageUrls.split(',').filter(url => url.trim());
+
+            let imagesHtml = '';
+            if (images.length > 0) {
+                const gridStyle = images.length > 1 ? 'display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.5rem;margin-bottom:1rem;' : 'margin-bottom:1rem;';
+                imagesHtml = `<div class="tribute-images-grid" style="${gridStyle}">`;
+                images.forEach(url => {
+                    imagesHtml += `<img class="tribute-image" src="${escapeHtml(url)}" alt="Tribute photo" loading="lazy" onclick="openLightbox('${escapeHtml(url).replace(/'/g, "\\'")}')">`;
+                });
+                imagesHtml += '</div>';
             }
 
             card.innerHTML = `
-                ${imageHtml}
+                ${imagesHtml}
                 <p class="tribute-text">${escapeHtml(d.message || '')}</p>
                 <div class="tribute-meta">
                     <div>
@@ -853,7 +893,7 @@
             const relationship = document.getElementById('relationship').value;
             const location = document.getElementById('location').value.trim();
             const message = document.getElementById('message').value.trim();
-            const imageFile = document.getElementById('imageInput').files[0];
+            const imageFile = document.getElementById('imageInput').files;
 
             if (!name || !message) return;
 
@@ -864,60 +904,56 @@
             firebaseError.classList.remove('show');
 
             try {
-                let imageUrl = '';
-
-                // Upload image first if present
-                if (imageFile) {
-                    const timestamp = Date.now();
-                    const safeName = imageFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
-                    const storageRef = ref(storage, `tributes/${timestamp}_${safeName}`);
-
-                    // Show progress
+                // Upload all selected images to Firebase Storage first
+                let imageUrls = [];
+                if (selectedFiles.length > 0) {
                     uploadProgress.classList.add('show');
-                    uploadProgressFill.style.width = '10%';
-                    uploadProgressText.textContent = 'Uploading photo...';
+                    uploadProgressFill.style.width = '5%';
+                    uploadProgressText.textContent = `Uploading photos...`;
 
-                    await new Promise((resolve, reject) => {
-                        const task = uploadBytesResumable(storageRef, imageFile);
+                    const uploadPromises = selectedFiles.map(async (file, idx) => {
+                        const timestamp = Date.now() + idx;
+                        const safeName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+                        const storageRef = ref(storage, `tributes/${timestamp}_${idx}_${safeName}`);
 
-                        task.on('state_changed',
-                            (snapshot) => {
-                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                                uploadProgressFill.style.width = Math.round(progress) + '%';
-                                uploadProgressText.textContent = `Uploading... ${Math.round(progress)}%`;
-                            },
-                            (error) => {
-                                reject(error);
-                            },
-                            async () => {
-                                try {
-                                    imageUrl = await getDownloadURL(task.snapshot.ref);
-                                    uploadProgressFill.style.width = '100%';
-                                    uploadProgressText.textContent = 'Photo uploaded!';
-                                    resolve();
-                                } catch (urlError) {
-                                    reject(urlError);
+                        await new Promise((resolve, reject) => {
+                            const task = uploadBytesResumable(storageRef, file);
+                            task.on('state_changed',
+                                (snapshot) => {
+                                    const totalProgress = (idx + snapshot.bytesTransferred / snapshot.totalBytes) / selectedFiles.length;
+                                    uploadProgressFill.style.width = Math.round(totalProgress * 90) + '%';
+                                    uploadProgressText.textContent = `Uploading photo ${idx+1}/${selectedFiles.length}...`;
+                                },
+                                reject,
+                                async () => {
+                                    try {
+                                        const url = await getDownloadURL(task.snapshot.ref);
+                                        imageUrls.push(url);
+                                        resolve();
+                                    } catch (e) { reject(e); }
                                 }
-                            }
-                        );
+                            );
+                        });
                     });
+
+                    await Promise.all(uploadPromises);
                 }
 
-                // Save tribute to Firestore via REST API (bypasses SDK timing issues)
+                // Save tribute to Firestore via REST API
                 uploadProgressText.textContent = 'Saving tribute...';
-                uploadProgressFill.style.width = '90%';
+                uploadProgressFill.style.width = '95%';
 
                 const tributeData = {
                     name,
                     relationship: relationship || '',
                     location: location || '',
                     message,
-                    imageUrl: imageUrl || '',
+                    imageUrls: imageUrls.join(','),
                     createdAt: new Date().toISOString()
                 };
 
                 const firestoreRes = await fetch(
-                    `https://firestore.googleapis.com/v1/projects/drmal-b8f0d/databases/drmal/documents/tributes?key=${firebaseConfig.apiKey}`,
+                    `https://firestore.googleapis.com/v1/projects/drmal-b8f0d/databases/drmal/documents/tributes?key=***`,
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -927,7 +963,7 @@
                                 relationship: { stringValue: tributeData.relationship },
                                 location: { stringValue: tributeData.location },
                                 message: { stringValue: tributeData.message },
-                                imageUrl: { stringValue: tributeData.imageUrl },
+                                imageUrls: { stringValue: tributeData.imageUrls },
                                 createdAt: { timestampValue: tributeData.createdAt }
                             }
                         })
@@ -944,7 +980,10 @@
                 uploadProgressText.textContent = 'Done!';
                 successMsg.classList.add('show');
                 form.reset();
-                removeImage({ preventDefault: () => {}, stopPropagation: () => {} });
+                selectedFiles = [];
+                imagePreviewGrid.innerHTML = '';
+                uploadLabel.classList.remove('has-file');
+                uploadLabelText.textContent = 'Choose up to 5 photos...';
 
             } catch (err) {
                 console.error('Submit error:', err);
