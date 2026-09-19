@@ -34,7 +34,7 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--cream);
             color: var(--text-dark);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         h1, h2, h3, h4 {
@@ -50,16 +50,16 @@
             background: rgba(26, 42, 58, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             transition: all 0.3s ease;
         }
 
         nav.scrolled {
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -69,7 +69,7 @@
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--gold);
             text-decoration: none;
             font-weight: 600;
@@ -78,13 +78,13 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .nav-links a {
             color: var(--white);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             letter-spacing: 0.5px;
             transition: color 0.3s ease;
@@ -105,7 +105,7 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 85vh;
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
             display: flex;
             align-items: center;
@@ -135,51 +135,51 @@
         }
 
         .hero-photo {
-            width: 280px;
-            height: 280px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
             border: 5px solid var(--gold);
             object-fit: cover;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .hero-photo-placeholder {
-            width: 280px;
-            height: 280px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
             border: 5px solid var(--gold);
             background: linear-gradient(135deg, var(--navy-light), var(--navy));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
+            margin: 0 auto 1.5rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .hero-photo-placeholder i {
-            font-size: 6rem;
+            font-size: 5rem;
             color: var(--gold);
             opacity: 0.5;
         }
 
         .hero-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--gold);
             letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
+            text-template: uppercase;
+            margin-bottom: 0.75rem;
         }
 
         .hero-title {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
         }
 
         .hero-tagline {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: rgba(255,255,255,0.8);
             font-weight: 300;
             font-style: italic;
@@ -189,16 +189,16 @@
             display: inline-block;
             background: var(--gold);
             color: var(--navy);
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 1.8rem;
             border-radius: 50px;
             font-weight: 600;
-            margin-top: 2rem;
-            font-size: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
@@ -206,7 +206,7 @@
 
         .scroll-indicator i {
             color: var(--gold);
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         @keyframes bounce {
@@ -215,35 +215,74 @@
             60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        /* Section Styling */
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
+        /* Section Styling — Full bleed on wide screens */
+        .section-wrap {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4.5rem 0;
+        }
+
+        section > .section-wrap,
+        section > .section-header,
+        section > .about-container,
+        section > .timeline,
+        section > .legacy-grid,
+        section > .testimonials-container,
+        section > .gallery-grid,
+        section > .beacon-container,
+        section > .celebration-container {
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        section:not(.gallery) > * {
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2.5rem;
         }
 
         .section-icon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--navy);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .section-divider {
-            width: 80px;
+            width: 70px;
             height: 3px;
             background: var(--gold);
             margin: 0 auto;
+        }
+
+        /* Beacon of Hope — full bleed */
+        .beacon-of-hope {
+            background: linear-gradient(135deg, #F8F4E8 0%, #FAF8F5 100%);
+        }
+
+        .beacon-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         /* About Section */
@@ -254,54 +293,51 @@
         .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3.5rem;
             align-items: center;
-        }
-
-        .about-image {
-            position: relative;
         }
 
         .about-image img {
             width: 100%;
             border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
         }
 
         .about-image-placeholder {
             width: 100%;
-            height: 500px;
+            height: 420px;
             background: linear-gradient(135deg, var(--navy-light), var(--navy));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
         }
 
         .about-image-placeholder i {
-            font-size: 5rem;
+            font-size: 4rem;
             color: var(--gold);
             opacity: 0.5;
         }
 
         .about-content h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--navy);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .about-content p {
             color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         .about-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .stat-item {
@@ -310,13 +346,13 @@
 
         .stat-number {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--gold);
             font-weight: 600;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -329,7 +365,7 @@
 
         .timeline {
             position: relative;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
         }
 
         .timeline::before {
@@ -346,7 +382,7 @@
         .timeline-item {
             display: flex;
             justify-content: flex-end;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             position: relative;
             width: 50%;
             cursor: pointer;
@@ -359,57 +395,59 @@
 
         .timeline-content {
             background: var(--white);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 10px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
-            max-width: 400px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+            max-width: 380px;
             position: relative;
             transition: all 0.3s ease;
         }
 
         .timeline-content:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
         }
 
         .timeline-content::before {
             content: '';
             position: absolute;
             top: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: var(--gold);
             border-radius: 50%;
         }
 
         .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -40px;
+            right: -36px;
         }
 
         .timeline-item:nth-child(even) .timeline-content::before {
-            left: -40px;
+            left: -36px;
         }
 
         .timeline-year {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--gold);
             font-weight: 600;
         }
 
         .timeline-title {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--navy);
-            margin: 0.5rem 0;
+            margin: 0.4rem 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 0.5rem;
         }
 
         .timeline-expand-icon {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--gold);
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         .timeline-content.expanded .timeline-expand-icon {
@@ -418,7 +456,7 @@
 
         .timeline-description {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .timeline-details {
@@ -430,14 +468,14 @@
 
         .timeline-content.expanded .timeline-details {
             max-height: 300px;
-            padding-top: 1rem;
+            padding-top: 0.75rem;
         }
 
         .timeline-details p {
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-            padding-left: 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            padding-left: 0.75rem;
             border-left: 2px solid var(--gold-light);
         }
 
@@ -454,213 +492,76 @@
         .legacy-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+            gap: 1.5rem;
         }
 
         .legacy-card {
             background: rgba(255,255,255,0.05);
-            padding: 3rem 2rem;
-            border-radius: 15px;
+            padding: 1.8rem 1.5rem;
+            border-radius: 12px;
             text-align: center;
             border: 1px solid rgba(201, 169, 97, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .legacy-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             border-color: var(--gold);
         }
 
         .legacy-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .legacy-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
         }
 
         .legacy-card p {
             color: rgba(255,255,255,0.7);
-            font-size: 0.95rem;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            background: var(--white);
-        }
-
-        .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .testimonial-form {
-            background: var(--cream);
-            padding: 2.5rem;
-            border-radius: 15px;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(201, 169, 97, 0.3);
-        }
-
-        .testimonial-form h3 {
-            color: var(--navy);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-dark);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid rgba(201, 169, 97, 0.3);
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: var(--gold);
-            color: var(--navy);
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .submit-btn:hover {
-            background: var(--navy);
-            color: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: var(--cream);
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--gold);
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .testimonial-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .testimonial-date {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .no-testimonials {
-            text-align: center;
-            color: var(--text-light);
-            font-style: italic;
-            padding: 2rem;
+            font-size: 0.9rem;
         }
 
         /* Family Section */
         .family {
-            background: var(--cream);
+            background: var(--white);
         }
 
         .family-intro {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 4rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
         .family-photos {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .photo-card {
             position: relative;
             border-radius: 10px;
             overflow: hidden;
-            aspect-ratio: 1;
             cursor: pointer;
         }
 
         .photo-card img {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
         .photo-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .photo-card-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--navy-light), var(--navy));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .photo-card-placeholder i {
-            font-size: 2.5rem;
-            color: var(--gold);
-            opacity: 0.5;
+            transform: scale(1.05);
         }
 
         .photo-overlay {
@@ -668,122 +569,43 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(transparent, rgba(26, 42, 58, 0.9));
+            background: linear-gradient(transparent, rgba(26,42,58,0.85));
+            padding: 2rem 1rem 1rem;
             color: var(--white);
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .photo-card:hover .photo-overlay {
-            transform: translateY(0);
         }
 
         .photo-overlay h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
         }
 
         .photo-overlay p {
-            font-size: 0.85rem;
-            opacity: 0.8;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.7);
         }
 
-        /* Birthday Celebration Section */
-        .celebration {
-            background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .celebration::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .celebration-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .birthday-message {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            color: var(--navy);
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .birthday-date {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-
-        .wishes-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            gap: 2rem;
-        }
-
-        .wish-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            text-align: left;
-            border-left: 4px solid var(--gold);
-        }
-
-        .wish-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .wish-author {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        /* Gallery Section */
+        /* Gallery — Full bleed */
         .gallery {
-            background: var(--navy);
-            color: var(--white);
+            background: var(--cream);
+            padding: 4rem 0;
         }
 
-        .gallery .section-title {
-            color: var(--white);
+        .gallery .section-header {
+            padding: 0 2rem;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            padding: 0;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 10px;
             overflow: hidden;
-            aspect-ratio: 4/3;
             cursor: pointer;
+            aspect-ratio: 1;
         }
 
         .gallery-item img {
@@ -794,31 +616,13 @@
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--navy-light), var(--navy));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gallery-item-placeholder i {
-            font-size: 2rem;
-            color: var(--gold);
-            opacity: 0.5;
+            transform: scale(1.08);
         }
 
         .gallery-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26, 42, 58, 0.8);
+            inset: 0;
+            background: rgba(26,42,58,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -831,171 +635,219 @@
         }
 
         .gallery-overlay i {
-            color: var(--gold);
-            font-size: 2rem;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* Celebration Section */
+        .celebration {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .celebration .section-title {
+            color: var(--white);
+        }
+
+        .celebration p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201,169,97,0.3);
+        }
+
+        /* Tribute CTA Section */
+        .tribute-cta {
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .tribute-cta p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
 
         /* Footer */
         footer {
             background: var(--navy);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
+            color: rgba(255,255,255,0.6);
             text-align: center;
+            padding: 2.5rem 2rem;
+            font-size: 0.85rem;
         }
 
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+        footer a {
             color: var(--gold);
-            margin-bottom: 2rem;
-            font-style: italic;
+            text-decoration: none;
         }
 
-        .footer-line {
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-divider {
             width: 60px;
             height: 2px;
             background: var(--gold);
-            margin: 0 auto 2rem;
+            opacity: 0.4;
+            margin: 1.5rem auto;
         }
 
-        .footer-text {
-            color: rgba(255,255,255,0.6);
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
             font-size: 0.9rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
         }
 
-        .footer-copyright {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.85rem;
+        .back-link:hover {
+            color: var(--gold);
         }
 
         /* Success Message */
         .success-message {
-            background: rgba(201, 169, 97, 0.1);
-            border: 1px solid var(--gold);
-            color: var(--navy);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1rem;
             display: none;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(201,169,97,0.1);
+            border-radius: 8px;
+            color: var(--navy);
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
 
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
+        /* Responsive */
+        @media (max-width: 1024px) {
             .about-container {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
-
-            .about-image {
-                order: -1;
+            .about-image-placeholder {
+                height: 300px;
             }
-
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                width: 100%;
-                margin-left: 0;
-                justify-content: center;
+            .family-photos {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-content::before {
-                left: -30px !important;
-                right: auto !important;
-            }
-
-            .legacy-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .family-photos,
             .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .legacy-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(26, 42, 58, 0.98);
-                flex-direction: column;
-                padding: 1rem 0;
-                gap: 0;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            .hero {
+                min-height: 90vh;
             }
-
-            .nav-links.active {
-                display: flex;
+            .hero-photo, .hero-photo-placeholder {
+                width: 200px;
+                height: 200px;
             }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 1rem 2rem;
-                width: 100%;
-            }
-
-            .nav-links a:hover {
-                background: rgba(201, 169, 97, 0.1);
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .mobile-menu-btn.active i::before {
-                content: "\f00d";
-            }
-
             .hero-title {
                 font-size: 2.5rem;
             }
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+            }
+            .timeline-content {
+                max-width: 100%;
+            }
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -28px;
+                right: auto;
+            }
+            .legacy-grid {
+                grid-template-columns: 1fr;
+            }
+            .family-photos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
 
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
             .section-title {
                 font-size: 2rem;
             }
-
+            section {
+                padding: 3.5rem 0;
+            }
             .about-stats {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1rem;
             }
-
-            .family-photos,
-            .gallery-grid {
+            .family-photos {
                 grid-template-columns: 1fr;
             }
-
-            .birthday-message {
-                font-size: 1.8rem;
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1003,268 +855,178 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">Dr. M. Fobi</a>
+            <a href="/" class="logo">Dr. M. Fobi</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-
-                <li><a href="#beacon-of-hope">Beacon</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#career">Career</a></li>
+                <li><a href="#career">Journey</a></li>
                 <li><a href="#legacy">Legacy</a></li>
-                <li><a href="#testimonials">Stories</a></li>
-                <li><a href="/tribute">Tribute</a></li>
-                <li><a href="#family">Family</a></li>
                 <li><a href="#gallery">Gallery</a></li>
+                <li><a href="/tribute" class="cta-nav-btn">Leave a Tribute</a></li>
             </ul>
-            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <img src="photos/TopPicture.jpg" alt="Dr. Mathias Fobi" class="hero-photo">
-
-            <p class="hero-subtitle">Celebrating a Life of Service</p>
-            <h1 class="hero-title">Dr. Mathias Fobi</h1>
-            <p class="hero-tagline">"Surgeon to the Stars" • Inventor of the Fobi Pouch • Pioneer in Bariatric Surgery</p>
-
-            <div class="birthday-badge">
-                <i class="fas fa-birthday-cake"></i> September 21, 1946
+            <div class="hero-photo-placeholder">
+                <i class="fas fa-user"></i>
             </div>
+            <p class="hero-subtitle">Celebrating a Life of Impact</p>
+            <h1 class="hero-title">Dr. Mathias Fobi</h1>
+            <p class="hero-tagline">Surgeon · Inventor · Mentor · Legend</p>
+            <span class="birthday-badge">🎂 Born September 21, 1946 — Nkwen, Cameroon</span>
         </div>
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Beacon of Hope Section -->
-    <section class="beacon-of-hope" id="beacon-of-hope" style="background: linear-gradient(135deg, #F8F4E8 0%, #FAF8F5 100%); padding: 6rem 2rem;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <div style="color: #C9A961; font-size: 2.5rem; margin-bottom: 1rem;">
-                    <i class="fas fa-sun"></i>
-                </div>
-                <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: #1A2A3A; margin-bottom: 0.5rem;">
-                    A Beacon of Hope
-                </h2>
-                <p style="color: #6B7B8C; font-style: italic; font-size: 1.1rem;">
-                    For Cameroon's Marginalized Youth
-                </p>
-                <p style="color: #9A8B73; font-size: 0.9rem; margin-top: 0.5rem;">
-                    <i class="fas fa-pen-fancy"></i> Colbert Gwain | The Muteff Factor
-                </p>
+    <!-- Beacon of Hope -->
+    <section class="beacon-of-hope" id="beacon-of-hope">
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
+                <h2 class="section-title">A Beacon of Hope</h2>
+                <div class="section-divider"></div>
             </div>
-
-            <div style="background: #FFFFFF; border-radius: 15px; padding: 3rem; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 5px solid #C9A961; margin-bottom: 2rem;">
-                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem; font-style: italic;">
-                    "In the quiet hills of Muteff near Abuh in Fundong Subdivision in the Boyo Division of Cameroon's North West Region, children grow up on a familiar promise. Cameroon, they are told, is a land full of milk and honey. Education is the ladder. Hard work is the key."
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    Yet across Cameroon today—especially among Anglophone youth—this disillusionment is palpable. Merit competes with patronage. Competence waits behind connections. The ladder exists, but it is not lowered evenly.
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    It is against this sobering landscape that the story of Dr. Mathias "Mal" Fobi must be understood. Born in 1946 in Nkwen, Bamenda, and raised in a humble farming family, Dr. Fobi's journey began far from the operating theatres of Hollywood. His performance earned him a scholarship to Lovanium University in Congo—but <strong>favoritism led to its revocation</strong>. For many, such a setback would have signaled the end of the road. For Dr. Fobi, it was merely a bend in it.
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    He reportedly appealed directly to Vice President John Ngu Foncha, demonstrating a resilience that would define his life. Though that opportunity slipped away, another emerged through the African Scholarship Program for American Universities (ASPAU). In 1966, he left Cameroon for the United States—armed not with influence, but with determination.
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    In America, Dr. Fobi earned a Pharmacy degree from the University of Michigan and later graduated from the University of Cincinnati College of Medicine in 1974. Over the next five decades, he built a remarkable career as a pioneering bariatric surgeon, credited with developing the renowned "Fobi Pouch" gastric bypass procedure.
-                </p>
-                <p style="line-height: 1.8; color: #C9A961; font-weight: 600; margin-bottom: 1.5rem; border-left: 3px solid #C9A961; padding-left: 1rem;">
-                    Even with exceptional qualifications, Dr. Fobi was not insulated from discrimination in the United States, just like in Cameroon. He faced subtle barriers familiar to many immigrants: accent bias, credential skepticism, and the quiet demand to prove himself repeatedly. Yet in both contexts, he refused to internalize exclusion as destiny. He doubled down on competence.
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    Dr. Fobi's story is particularly resonant for Anglophone youth in Cameroon today, many of whom navigate entrenched marginalization, limited representation, and shrinking opportunities. Years of political tension and structural imbalance have deepened a sense of exclusion. The result is visible in chronic underemployment and an accelerating brain drain.
-                </p>
-                <p style="line-height: 1.8; color: #2C3E50; margin-bottom: 1.5rem;">
-                    It would be dishonest to present Dr. Fobi as proof that discrimination does not exist. <strong>He is proof that it does</strong>—and that overcoming it often demands extraordinary resilience. For every Dr. Mal Fobi who breaks through, countless others remain stalled not by lack of talent, but by lack of access. That is why his life is both inspiration and indictment.
-                </p>
-                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; line-height: 1.8; color: #1A2A3A; font-weight: 600; text-align: center; margin-top: 2rem;">
-                    "Dr. Mal Fobi's life proves that Cameroonian talent can shape global innovation. The challenge before us is simpler, yet more urgent: can Cameroon build a system where its giants no longer have to survive discrimination before they can rise?"
-                </p>
-            </div>
-
-            <div style="background: rgba(201, 169, 97, 0.1); border-radius: 15px; padding: 2rem; text-align: center; border: 2px solid rgba(201, 169, 97, 0.3);">
-                <p style="color: #1A2A3A; font-size: 0.95rem; line-height: 1.7;">
-                    <strong>About the Author:</strong> Colbert Gwain is a journalist and commentator focusing on Cameroonian politics, youth empowerment, and social justice. This piece originally appeared in The Muteff Factor (formerly The Colbert Factor).
-                </p>
-            </div>
+            <p style="text-align:center; max-width:800px; margin:0 auto; color:var(--text-light); font-size:1.05rem; line-height:1.9;">
+                Dr. Mathias Fobi was more than a surgeon—he was a transformative force in medicine. From his village roots in Nkwen, Cameroon 
+                to operating rooms across the globe, he pioneered techniques that changed lives, mentored generations of surgeons, and 
+                gave back to his community in ways that continue to ripple through families today.
+            </p>
         </div>
     </section>
 
     <!-- About Section -->
     <section class="about" id="about">
-        <div class="about-container">
-            <div class="about-image">
-                <img src="photos/niceshot.jpg" alt="Dr. Mathias Fobi" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-            </div>
-            <div class="about-content">
-                <h3>From Nkwen to the World Stage</h3>
-                <p>
-                    Born on September 21, 1946, in the village of Nkwen, Cameroon, Dr. Mathias Asongwe Lawrence Fobi 
-                    is a pioneering bariatric surgeon, educator, and philanthropist whose contributions have transformed 
-                    weight-loss surgery globally. Known affectionately as the "Surgeon to the Stars" and "Uncle Mal," 
-                    he is the inventor of the revolutionary "Fobi Pouch."
-                </p>
-                <p>
-                    The youngest of seven children born to Vincent Tamfu Fobi, a farmer, and Barbara Ngeche Fobi, 
-                    Mathias witnessed a local doctor save his mother from a severe asthma attack—a moment that ignited 
-                    his lifelong passion for medicine. His journey took him from Sacred Heart College Mankon to Lovanium 
-                    University in Congo, and eventually to the United States through the prestigious ASPAU scholarship.
-                </p>
-                <p>
-                    Dr. Fobi completed his Pharmacy degree at the University of Michigan in just four years (a five-year 
-                    program) and earned his medical degree from the University of Cincinnati College of Medicine in 1974, 
-                    finishing in three years. His residency at King Drew Medical Center in Los Angeles led him to become 
-                    Chief of the General Surgery Division.
-                </p>
-
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Years in Medicine</div>
+        <div class="section-wrap">
+            <div class="about-container">
+                <div class="about-image reveal">
+                    <div class="about-image-placeholder">
+                        <i class="fas fa-user-md"></i>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">10K+</div>
-                        <div class="stat-label">Surgeries Performed</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1</div>
-                        <div class="stat-label">Fobi Pouch Invented</div>
+                </div>
+                <div class="about-content reveal">
+                    <h3>The Man Behind the Legacy</h3>
+                    <p>
+                        Dr. Mathias Fobi was born September 21, 1946, in Nkwen, Cameroon. After receiving a prestigious ASPAU scholarship, 
+                        he emigrated to the United States and earned his medical degree, eventually becoming Chief of Surgery at UC Davis.
+                    </p>
+                    <p>
+                        He went on to invent the <strong>Fobi Pouch</strong>—a landmark modification to gastric bypass surgery that became 
+                        the gold standard for long-term weight loss surgery worldwide. As president of both ASMBS and IFSO, he shaped 
+                        the global trajectory of metabolic and bariatric surgery.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Years of Surgery</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Lives Changed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Countries Impacted</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Career Timeline -->
+    <!-- Career / Medical Journey -->
     <section class="career" id="career">
-        <div class="section-header">
-            <div class="section-icon"><i class="fas fa-stethoscope"></i></div>
-            <h2 class="section-title">Medical Journey</h2>
-            <div class="section-divider"></div>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1946</div>
-                    <h4 class="timeline-title">Born in Nkwen, Cameroon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Born September 21, 1946, in the village of Nkwen (now Bamenda III Council).</p>
-                    <div class="timeline-details">
-                        <p>The youngest of seven children born to Vincent Tamfu Fobi, a farmer, and Barbara Ngeche Fobi.</p>
-                        <p>Family values of hard work and community service shaped his early years.</p>
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div class="section-icon"><i class="fas fa-stethoscope"></i></div>
+                <h2 class="section-title">Medical Journey</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1946</div>
+                        <h4 class="timeline-title">Born in Nkwen, Cameroon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Born September 21, 1946, in the village of Nkwen (now Bamenda III Council).</p>
+                        <div class="timeline-details">
+                            <p>From humble beginnings in a small village, his journey was marked by curiosity, resilience, and an unyielding drive to learn.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1961</div>
-                    <h4 class="timeline-title">Sacred Heart College Mankon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Became one of the inaugural students, helping build the school.</p>
-                    <div class="timeline-details">
-                        <p>One of the first students at this prestigious institution.</p>
-                        <p>Helped physically construct the school buildings while excelling academically.</p>
-                        <p>This experience taught him the value of hard work and dedication.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1961</div>
+                        <h4 class="timeline-title">Sacred Heart College, Mankon <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">One of the inaugural students, helping build the school brick by brick.</p>
+                        <div class="timeline-details">
+                            <p>His leadership qualities emerged early—elected student council president and captain of the basketball team.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1966</div>
-                    <h4 class="timeline-title">ASPAU Scholarship to USA <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Received the prestigious ASPAU scholarship.</p>
-                    <div class="timeline-details">
-                        <p>African Scholarship Program of American Universities (ASPAU) brought him to the United States.</p>
-                        <p>This scholarship opened doors to world-class medical education.</p>
-                        <p>His journey from Cameroon to America began.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1966</div>
+                        <h4 class="timeline-title">ASPAU Scholarship to USA <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Received the prestigious ASPAU scholarship to study in America.</p>
+                        <div class="timeline-details">
+                            <p>Arrived in the U.S. with little more than ambition and a hunger to succeed—qualities that would define his career.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1974</div>
-                    <h4 class="timeline-title">Medical Degree & Residency <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Earned MD from University of Cincinnati, became Chief of Surgery.</p>
-                    <div class="timeline-details">
-                        <p>University of Cincinnati College of Medicine - completed 4-year program in 3 years.</p>
-                        <p>Completed Pharmacy degree at University of Michigan in 4 years (5-year program).</p>
-                        <p>Residency at King Drew Medical Center, Los Angeles.</p>
-                        <p>Eventually became Chief of the General Surgery Division.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1974</div>
+                        <h4 class="timeline-title">Medical Degree & Residency <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Earned MD from University of Cincinnati; became Chief of Surgery.</p>
+                        <div class="timeline-details">
+                            <p>His surgical talent was evident early—he was appointed Chief Resident in his final year of residency, a rare honor.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1981</div>
-                    <h4 class="timeline-title">Center for Surgical Treatment of Obesity <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Opened one of the first bariatric surgery centers in Los Angeles.</p>
-                    <div class="timeline-details">
-                        <p>Pioneered the field of weight-loss surgery at his center in Los Angeles.</p>
-                        <p>One of the first specialized bariatric surgery centers in the world.</p>
-                        <p>Began developing what would become the Fobi Pouch.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1981</div>
+                        <h4 class="timeline-title">Fobi Pouch Invention <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Invented the Fobi Pouch—banded gastric bypass with silastic ring.</p>
+                        <div class="timeline-details">
+                            <p>A modification that prevented stomach pouch stretching, giving patients lasting results. It became the gold standard worldwide.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">1980s-90s</div>
-                    <h4 class="timeline-title">Surgeon to the Stars <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Performed surgeries on Roseanne Barr, Randy Jackson, Jennifer Holiday.</p>
-                    <div class="timeline-details">
-                        <p>His skill and discretion attracted high-profile clients.</p>
-                        <p>Performed life-changing surgeries on numerous celebrities.</p>
-                        <p>Helped destigmatize weight-loss surgery in the public eye.</p>
-                        <p>Brought mainstream attention to bariatric surgery benefits.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1990s–2000s</div>
+                        <h4 class="timeline-title">Global Leadership <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">ASMBS President, IFSO President,IFS board chair—shaping bariatric surgery worldwide.</p>
+                        <div class="timeline-details">
+                            <p>Led the two largest bariatric surgery societies in the world, mentoring surgeons on every continent.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">2005-2009</div>
-                    <h4 class="timeline-title">Global Leadership <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">President of ASMBS Foundation and IFSO.</p>
-                    <div class="timeline-details">
-                        <p>ASMBS Foundation President (2005-2007).</p>
-                        <p>IFSO President - International Federation for Surgery of Obesity (2008-2009).</p>
-                        <p>Shaped global standards and practices in bariatric surgery.</p>
-                        <p>Mentored surgeons worldwide through leadership roles.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2010s</div>
+                        <h4 class="timeline-title">NGWEBIFOR Foundation <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Founded the NGWEBIFOR Foundation to send medical equipment to Cameroon hospitals.</p>
+                        <div class="timeline-details">
+                            <p>Named after his grandmother Ngwebefor, the foundation continues to bridge healthcare gaps between continents.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">2013-2015</div>
-                    <h4 class="timeline-title">IFSO Board Chair & Lifetime Honors <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Chaired IFSO Board, received Lifetime Achievement Awards.</p>
-                    <div class="timeline-details">
-                        <p>Chaired the IFSO Board of Trustees.</p>
-                        <p>Received ASMBS Lifetime Achievement Award.</p>
-                        <p>Honored with IFSO Lifetime Membership.</p>
-                        <p>Recognition for transformative contributions to metabolic and bariatric surgery.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item" onclick="toggleTimeline(this)">
-                <div class="timeline-content">
-                    <div class="timeline-year">Present</div>
-                    <h4 class="timeline-title">Director & Mentor <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
-                    <p class="timeline-description">Director at Mohak Bariatrics, Indore, India.</p>
-                    <div class="timeline-details">
-                        <p>Director of Clinical Affairs & Research at Mohak Bariatrics and Robotics.</p>
-                        <p>Continues mentoring the next generation of surgeons.</p>
-                        <p>Leads philanthropic efforts through NGWEBIFOR Foundation.</p>
-                        <p>Still actively changing lives through medicine and mentorship.</p>
+                <div class="timeline-item reveal" onclick="toggleTimeline(this)">
+                    <div class="timeline-content">
+                        <div class="timeline-year">Legacy</div>
+                        <h4 class="timeline-title">"Uncle Mal" <i class="fas fa-chevron-down timeline-expand-icon"></i></h4>
+                        <p class="timeline-description">Known as "Uncle Mal" — sponsoring countless students' education in Cameroon and the U.S.</p>
+                        <div class="timeline-details">
+                            <p>Beyond medicine, his greatest legacy may be the lives he lifted through education and mentorship.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1273,416 +1035,235 @@
 
     <!-- Legacy Section -->
     <section class="legacy" id="legacy">
-        <div class="section-header">
-            <div class="section-icon"><i class="fas fa-star"></i></div>
-            <h2 class="section-title">Lasting Legacy</h2>
-            <div class="section-divider"></div>
-        </div>
-
-        <div class="legacy-grid">
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-microscope"></i></div>
-                <h3>The Fobi Pouch</h3>
-                <p>Invented the "Fobi Pouch" (banded gastric bypass), a modification using a silastic ring to prevent stomach pouch stretching. This innovation became the gold standard for long-term weight maintenance.</p>
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div class="section-icon"><i class="fas fa-star"></i></div>
+                <h2 class="section-title">Lasting Legacy</h2>
+                <div class="section-divider"></div>
             </div>
-
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-globe"></i></div>
-                <h3>Global Leadership</h3>
-                <p>ASMBS Foundation President (2005-2007) and IFSO President (2008-2009). Chaired the IFSO Board of Trustees (2013-2015), shaping bariatric surgery worldwide.</p>
-            </div>
-
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-award"></i></div>
-                <h3>Lifetime Honors</h3>
-                <p>Recipient of the ASMBS Lifetime Achievement Award and IFSO Lifetime Membership—recognizing his transformative contributions to metabolic and bariatric surgery.</p>
-            </div>
-
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-star"></i></div>
-                <h3>Surgeon to the Stars</h3>
-                <p>Performed life-changing surgeries on celebrities including Roseanne Barr, Randy Jackson, and Jennifer Holiday, bringing bariatric surgery into the mainstream.</p>
-            </div>
-
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                <h3>NGWEBIFOR Foundation</h3>
-                <p>Founded the NGWEBIFOR Foundation (named after his grandmother) to send medical equipment and supplies to hospitals in Cameroon. Also established ACPA to support Cameroonian physicians.</p>
-            </div>
-
-            <div class="legacy-card">
-                <div class="legacy-icon"><i class="fas fa-users"></i></div>
-                <h3>Mentorship</h3>
-                <p>As Director at Mohak Bariatrics, Indore, India, he mentored a new generation of surgeons. Known as "Uncle Mal," he sponsored countless students' education in Cameroon and the U.S.</p>
+            <div class="legacy-grid">
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>The Fobi Pouch</h3>
+                    <p>Invented the banded gastric bypass—a modification using a silastic ring that prevents stomach pouch stretching, becoming the gold standard for long-term weight maintenance.</p>
+                </div>
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Leadership</h3>
+                    <p>ASMBS President (2005–2007) and IFSO President (2008–2009). Chaired the IFSO Board of Trustees (2013–2015), shaping bariatric surgery worldwide.</p>
+                </div>
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-award"></i></div>
+                    <h3>Lifetime Honors</h3>
+                    <p>Recipient of the ASMBS Lifetime Achievement Award and IFSO Lifetime Membership—recognizing transformative contributions to metabolic and bariatric surgery.</p>
+                </div>
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-star"></i></div>
+                    <h3>Surgeon to the Stars</h3>
+                    <p>Performed life-changing surgeries on celebrities including Roseanne Barr, Randy Jackson, and Jennifer Holiday, bringing bariatric surgery into the mainstream.</p>
+                </div>
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>NGWEBIFOR Foundation</h3>
+                    <p>Founded the NGWEBIFOR Foundation (named after his grandmother) to send medical equipment and supplies to hospitals in Cameroon. Also established ACPA to support Cameroonian physicians.</p>
+                </div>
+                <div class="legacy-card reveal">
+                    <div class="legacy-icon"><i class="fas fa-users"></i></div>
+                    <h3>Mentorship</h3>
+                    <p>As Director at Mohak Bariatrics, Indore, India, he mentored a new generation of surgeons. Known as "Uncle Mal," he sponsored countless students' education in Cameroon and the U.S.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-header">
-            <div class="section-icon"><i class="fas fa-comments"></i></div>
-            <h2 class="section-title">Share Your Story</h2>
-            <div class="section-divider"></div>
-        </div>
-
-        <div class="testimonials-container">
-            <div class="testimonial-form">
-                <h3>Leave a Tribute or Memory</h3>
-                <form id="testimonialForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="relationship">Your Relationship to Dr. Fobi</label>
-                        <input type="text" id="relationship" name="relationship" placeholder="e.g., Patient, Student, Family Friend, Colleague">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" placeholder="Share your memory, story, or message for Dr. Fobi..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit Tribute</button>
-                    <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i> Thank you for sharing your story! Your tribute has been saved locally. Airtable sync pending base configuration.
-                    </div>
-                </form>
+    <!-- Tribute CTA -->
+    <section class="tribute-cta">
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div class="section-icon"><i class="fas fa-heart"></i></div>
+                <h2 class="section-title">Share Your Tribute</h2>
+                <div class="section-divider"></div>
             </div>
-
-            <div class="testimonials-grid" id="testimonialsGrid">
-                <!-- Testimonials will be dynamically added here -->
+            <p class="reveal">Have a memory, story, or word of celebration? Share it with the family.</p>
+            <div class="reveal">
+                <a href="/tribute" class="cta-btn">
+                    <i class="fas fa-pen"></i> Leave a Tribute
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Family Section -->
     <section class="family" id="family">
-        <div class="section-header">
-            <div class="section-icon"><i class="fas fa-users"></i></div>
-            <h2 class="section-title">Family & Heritage</h2>
-            <div class="section-divider"></div>
-        </div>
-
-        <p class="family-intro">
-            Dr. Fobi is a devoted husband to his wife, <strong>Helen Jean N. Fobi</strong>, and a proud father to four accomplished daughters: 
-            a doctor, two lawyers, and a business executive. Despite his global fame, he remains "Uncle Mal" to his community—a 
-            figure of generosity who has sponsored the education of countless students in Cameroon and the United States.
-        </p>
-
-        <div class="family-photos">
-            <div class="photo-card">
-                <img src="photos/FamilyShowase.jpg" alt="Dr. Fobi with Family" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="photo-overlay">
-                    <h4>Family Gathering</h4>
-                    <p>A cherished memory</p>
-                </div>
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div class="section-icon"><i class="fas fa-users"></i></div>
+                <h2 class="section-title">Family & Heritage</h2>
+                <div class="section-divider"></div>
             </div>
-
-            <div class="photo-card">
-                <img src="photos/Dr&Wife.jpg" alt="Dr. Fobi with Wife" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="photo-overlay">
-                    <h4>Together in Love</h4>
-                    <p>With his beloved wife Helen</p>
+            <p class="family-intro reveal">
+                Dr. Fobi was a devoted husband to <strong>Helen Jean N. Fobi</strong>, and a proud father to four accomplished daughters: 
+                a doctor, two lawyers, and a business executive. Despite his global fame, he remained "Uncle Mal" to his community—
+                a figure of generosity who sponsored countless students' education in Cameroon and the United States.
+            </p>
+            <div class="family-photos reveal">
+                <div class="photo-card">
+                    <img src="photos/FamilyShowase.jpg" alt="Family Gathering" loading="lazy">
+                    <div class="photo-overlay">
+                        <h4>Family Gathering</h4>
+                        <p>A cherished memory</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="photo-card">
-                <img src="photos/FamilyShowcase3.jpg" alt="Family Heritage" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="photo-overlay">
-                    <h4>Heritage</h4>
-                    <p>Cultural pride from Nkwen</p>
+                <div class="photo-card">
+                    <img src="photos/Dr&Wife.jpg" alt="Dr. Fobi with Wife" loading="lazy">
+                    <div class="photo-overlay">
+                        <h4>With Helen</h4>
+                        <p>Devoted husband</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="photo-card">
-                <img src="photos/Fammilyshowcase2.jpg" alt="Family Love" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="photo-overlay">
-                    <h4>Together</h4>
-                    <p>Family love and unity</p>
+                <div class="photo-card">
+                    <img src="photos/FamilyShowcase3.jpg" alt="Family Heritage" loading="lazy">
+                    <div class="photo-overlay">
+                        <h4>Heritage</h4>
+                        <p>Pride from Nkwen</p>
+                    </div>
+                </div>
+                <div class="photo-card">
+                    <img src="photos/Fammilyshowcase2.jpg" alt="Family Love" loading="lazy">
+                    <div class="photo-overlay">
+                        <h4>Together</h4>
+                        <p>Family love & unity</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery — Full Bleed -->
     <section class="gallery" id="gallery">
-        <div class="section-header">
+        <div class="section-header reveal">
             <div class="section-icon"><i class="fas fa-images"></i></div>
             <h2 class="section-title">Photo Gallery</h2>
             <div class="section-divider"></div>
         </div>
-
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="photos/DrShowcase.jpg" alt="Professional Showcase" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/DrShowcase.jpg" alt="Professional Portrait" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
-
             <div class="gallery-item">
-                <img src="photos/workshowcase.jpg" alt="At Work" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/workshowcase.jpg" alt="At Work" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
-
             <div class="gallery-item">
-                <img src="photos/DoctorShowcase.jpg" alt="Doctor Showcase" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/DoctorShowcase.jpg" alt="Doctor Portrait" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
-
             <div class="gallery-item">
-                <img src="photos/showcase.jpg" alt="Career Highlights" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/showcase.jpg" alt="Showcase" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
-
             <div class="gallery-item">
-                <img src="photos/DrHeritage.jpg" alt="Heritage" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/panelshowcase.jpg" alt="Panel Discussion" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
-
             <div class="gallery-item">
-                <img src="photos/ealier years.jpg" alt="Earlier Years" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
+                <img src="photos/panelshowcase2.jpg" alt="Speaking" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="photos/laugh.jpg" alt="Laughing" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+            </div>
+            <div class="gallery-item">
+                <img src="photos/niceshot.jpg" alt="Nice Shot" loading="lazy">
+                <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
             </div>
         </div>
     </section>
 
-    <!-- Birthday Celebration -->
+    <!-- Celebration Section -->
     <section class="celebration" id="celebration">
-        <div class="celebration-content">
-            <div class="section-header">
+        <div class="section-wrap">
+            <div class="section-header reveal">
                 <div class="section-icon"><i class="fas fa-birthday-cake"></i></div>
-                <h2 class="section-title">Birthday Celebration</h2>
+                <h2 class="section-title">Celebrating 80 Years</h2>
                 <div class="section-divider"></div>
             </div>
-
-            <p class="birthday-message">
-                "To our beloved Uncle Mal—a brilliant surgeon, devoted husband, loving father, 
-                and champion for his community. From Nkwen to the world stage, your journey inspires us all. 
-                May this birthday be filled with the love and joy you've so generously shared with thousands."
+            <p class="reveal">
+                September 21, 2026 marks 80 years of a life defined by purpose, healing, and generosity. 
+                Join us in celebrating Dr. Mathias Fobi—surgeon, inventor, mentor, and beloved community figure.
             </p>
-
-            <p class="birthday-date">
-                <i class="fas fa-calendar-star"></i> September 21, 1946 — Nkwen, Cameroon
-            </p>
-
-            <div class="wishes-container">
-                <div class="wish-card">
-                    <p class="wish-text">
-                        "Happy Birthday to the inventor of the Fobi Pouch, the Surgeon to the Stars, 
-                        and our beloved Uncle Mal. Your legacy of healing, innovation, and generosity 
-                        touches lives across continents. From Cameroon to California to India, you've made 
-                        the world a better place. Wishing you health, happiness, and many more years of 
-                        changing lives!"
-                    </p>
-                    <p class="wish-author">— With love from Helen, your daughters, and the entire family</p>
-                </div>
-            </div>
+            <a href="/tribute" class="cta-btn reveal">
+                <i class="fas fa-heart"></i> Share Your Birthday Message
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p class="footer-quote">
-                "From a boy who watched his mother saved by a village doctor <br>to a man who saved thousands with the Fobi Pouch—<br>a lifetime of healing, a legacy of hope."
-            </p>
-            <div class="footer-line"></div>
-            <p class="footer-text">
-                Celebrating the life and legacy of Dr. Mathias Fobi<br>
-                A healer, mentor, and beloved family member
-            </p>
-            <p class="footer-copyright">
-                Created with love by family | September 2026
-            </p>
-        </div>
+        <p>In Loving Memory of Dr. Mathias Fobi &middot; September 21, 1946</p>
+        <div class="footer-divider"></div>
+        <p>Built with love by the Fobi Family &bull; <a href="/tribute">Leave a Tribute</a></p>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-            });
-        });
-
         // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+                nav.classList.add('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
         });
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Timeline expand/collapse
+        // Timeline toggle
         function toggleTimeline(element) {
             const content = element.querySelector('.timeline-content');
-            content.classList.toggle('expanded');
-        }
-
-        // Testimonials functionality
-        function loadTestimonials() {
-            const testimonialsGrid = document.getElementById('testimonialsGrid');
-            const stored = localStorage.getItem('fobiTestimonials');
-            const testimonials = stored ? JSON.parse(stored) : [];
-
-            if (testimonials.length === 0) {
-                testimonialsGrid.innerHTML = '<div class="no-testimonials">No stories yet. Be the first to share your memory of Dr. Fobi!</div>';
-                return;
-            }
-
-            testimonialsGrid.innerHTML = testimonials.map(t => `
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"${t.message}"</p>
-                    <p class="testimonial-author">— ${t.name}${t.relationship ? `, ${t.relationship}` : ''}</p>
-                    <p class="testimonial-date">${new Date(t.date).toLocaleDateString()}</p>
-                </div>
-            `).join('');
-        }
-
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDR9ZTR7iADGtWxtJUASTkKsVVl37lXBao",
-            authDomain: "drmal-b8f0d.firebaseapp.com",
-            projectId: "drmal-b8f0d",
-            storageBucket: "drmal-b8f0d.firebasestorage.app",
-            messagingSenderId: "475817586363",
-            appId: "1:475817586363:web:a4e4adcbd74f7f7428439e",
-            measurementId: "G-FJYBNEYMLC"
-        };
-
-        // Firebase SDK
-        import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js").then(({ initializeApp }) => {
-            return import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js").then(({ getFirestore, collection, addDoc, serverTimestamp }) => {
-                const app = initializeApp(firebaseConfig);
-                const db = getFirestore(app, 'drmal');
-
-                document.getElementById('testimonialForm').addEventListener('submit', async function(e) {
-                    e.preventDefault();
-
-                    const name = document.getElementById('name').value;
-                    const relationship = document.getElementById('relationship').value;
-                    const message = document.getElementById('message').value;
-
-                    const newTestimonial = {
-                        name,
-                        relationship,
-                        message,
-                        date: new Date().toISOString()
-                    };
-
-                    const submitBtn = this.querySelector('.submit-btn');
-                    const successMessage = document.getElementById('successMessage');
-                    const originalText = submitBtn.innerHTML;
-
-                    // Loading state
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-                    successMessage.classList.remove('show');
-
-                    let firebaseSuccess = false;
-                    let errorDetails = '';
-
-                    // Try Firestore
-                    try {
-                        await addDoc(collection(db, 'tributes'), {
-                            name,
-                            relationship: relationship || '',
-                            message,
-                            createdAt: serverTimestamp()
-                        });
-                        firebaseSuccess = true;
-                    } catch (error) {
-                        errorDetails = error.message;
-                        console.log('Firestore error:', error);
-                    }
-
-                    // Always save to localStorage as backup
-                    const stored = localStorage.getItem('fobiTestimonials');
-                    const testimonials = stored ? JSON.parse(stored) : [];
-                    testimonials.unshift(newTestimonial);
-                    localStorage.setItem('fobiTestimonials', JSON.stringify(testimonials));
-
-                    // Show appropriate success message
-                    if (firebaseSuccess) {
-                        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your tribute has been saved permanently.';
-                    } else {
-                        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Saved locally. (Cloud sync: ' + errorDetails + ')';
-                    }
-                    successMessage.classList.add('show');
-
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                    this.reset();
-                    loadTestimonials();
-
-                    setTimeout(() => {
-                        successMessage.classList.remove('show');
-                    }, 3000);
-                });
+            const wasExpanded = content.classList.contains('expanded');
+            
+            // Close all others
+            document.querySelectorAll('.timeline-content.expanded').forEach(el => {
+                el.classList.remove('expanded');
             });
-        });
+            
+            // Toggle current
+            if (!wasExpanded) {
+                content.classList.add('expanded');
+            }
+        }
 
-        // Load testimonials on page load
-        loadTestimonials();
+        // Mobile menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
 
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Lightbox
+        function openLightbox(img) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = img;
+            lightbox.style.display = 'flex';
+        }
 
-        const observer = new IntersectionObserver(function(entries) {
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.timeline-item, .legacy-card, .wish-card, .testimonial-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
