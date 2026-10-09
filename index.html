@@ -644,6 +644,43 @@
             font-size: 1.5rem;
         }
 
+        /* Tribute Wall Memories Gallery */
+        .tribute-memories {
+            background: var(--cream);
+            padding: 4rem 0;
+        }
+
+        .tribute-memories .memories-sub {
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 1rem;
+            padding: 0 2rem;
+            font-size: 0.95rem;
+        }
+
+        .tribute-memories .memories-sub a {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(26,42,58,0.9));
+            color: var(--white);
+            font-size: 0.8rem;
+            padding: 1.8rem 0.8rem 0.6rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
         /* Celebration Section */
         .celebration {
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
@@ -866,6 +903,7 @@
                 <li><a href="#career">Journey</a></li>
                 <li><a href="#legacy">Legacy</a></li>
                 <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#tribute-memories">Memories</a></li>
                 <li><a href="/tribute" class="cta-nav-btn">Leave a Tribute</a></li>
             </ul>
             <button class="mobile-menu-btn" onclick="toggleMenu()">
@@ -1189,6 +1227,17 @@
         </div>
     </section>
 
+    <!-- Tribute Wall Memories Gallery -->
+    <section class="tribute-memories" id="tribute-memories" style="display:none;">
+        <div class="section-header reveal">
+            <div class="section-icon"><i class="fas fa-heart"></i></div>
+            <h2 class="section-title">Memories from the Tribute Wall</h2>
+            <div class="section-divider"></div>
+            <p class="memories-sub">Photos shared by family, friends &amp; colleagues — <a href="/tribute">share your own tribute</a></p>
+        </div>
+        <div class="gallery-grid" id="tributeMemoriesGrid"></div>
+    </section>
+
     <!-- Celebration Section -->
     <section class="celebration" id="celebration">
         <div class="section-wrap">
@@ -1271,6 +1320,74 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <!-- Tribute Wall Memories: live photo gallery from the Firestore tribute wall -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            orderBy,
+            limit,
+            getDocs,
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "<redacted>",
+            authDomain: "drmal-b8f0d.firebaseapp.com",
+            projectId: "drmal-b8f0d",
+            storageBucket: "drmal-b8f0d.firebasestorage.app",
+            messagingSenderId: "475817586363",
+            appId: "1:475817586363:web:a4e4adcbd74f7f7428439e",
+            measurementId: "G-FJYBNEYMLC"
+        };
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str || '';
+            return div.innerHTML;
+        }
+
+        async function loadTributeMemories() {
+            const section = document.getElementById('tribute-memories');
+            const grid = document.getElementById('tributeMemoriesGrid');
+            if (!section || !grid) return;
+            try {
+                const app = initializeApp(firebaseConfig);
+                const db = getFirestore(app, 'drmal');
+                const snap = await getDocs(
+                    query(collection(db, 'tributes'), orderBy('createdAt', 'desc'), limit(60))
+                );
+                const photos = [];
+                snap.forEach(doc => {
+                    const d = doc.data();
+                    let urls = [];
+                    if (d.imageUrl) urls.push(d.imageUrl);
+                    if (d.imageUrls) {
+                        urls = urls.concat(
+                            d.imageUrls.split(',').map(u => u.trim()).filter(u => u)
+                        );
+                    }
+                    const name = d.name || 'Anonymous';
+                    urls.slice(0, 5).forEach(url => photos.push({ url, name }));
+                });
+                if (!photos.length) return; // keep the section hidden
+                grid.innerHTML = photos.slice(0, 12).map(p => {
+                    const safeUrl = escapeHtml(p.url).replace(/'/g, "\\'");
+                    return '<div class="gallery-item" onclick="openLightbox(\'' + safeUrl + '\')">' +
+                        '<img src="' + escapeHtml(p.url) + '" alt="Tribute photo shared by ' + escapeHtml(p.name) + '" loading="lazy">' +
+                        '<div class="gallery-caption"><i class="fas fa-heart"></i> ' + escapeHtml(p.name) + '</div>' +
+                        '</div>';
+                }).join('');
+                section.style.display = 'block';
+            } catch (e) {
+                // Firestore unreachable or no photos: leave the section hidden.
+            }
+        }
+
+        loadTributeMemories();
     </script>
 </body>
 </html>
